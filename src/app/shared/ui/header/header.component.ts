@@ -10,4 +10,18 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
+icono: number = 1;
+icono2: string = '1.png';
+
+getRandomNumber = (min: number, max: number) => {
+    return Math.floor(min + Math.random() * max)
+  }
+  
+
+changePs1Icon(min: number, max:number){
+    this.icono = this.getRandomNumber (min, max);
+    return this.icono;
+  }
+
 }
+
