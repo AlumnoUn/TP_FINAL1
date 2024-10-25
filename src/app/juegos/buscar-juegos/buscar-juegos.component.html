@@ -1,0 +1,27 @@
+<style>
+    .error-message {
+  color: red; /* Color rojo para el mensaje de error */
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
+
+<div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar juegos" />
+    <button (click)="searchGames()">Buscar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <div class="game-results" *ngIf="games.length > 0">
+    <div *ngFor="let game of games" class="game-card">
+      <img *ngIf="game.cover?.url" [src]="game.cover.url" alt="{{ game.name }}" />
+      <h3>{{ game.name }}</h3>
+      <p *ngIf="game.summary">{{ game.summary }}</p>
+      <p *ngIf="game.rating">Rating: {{ game.rating }}</p>
+    </div>
+  </div>
+
+  

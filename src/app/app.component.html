@@ -9,8 +9,17 @@
   <div class="flex flex-col min-h-screen">
     <app-header />
 
+    <nav>
+      <ul>    
+        <li>
+          <a routerLink="buscarJuegos" routerLinkActive="active" ariaCurrentWhenActive="page">Buscar Juegos</a>
+        </li>    
+      </ul>
+    </nav>
+
+
     <main>
-      <router-outlet />
+      <router-outlet></router-outlet>
     </main>
   </div>
 </body>
