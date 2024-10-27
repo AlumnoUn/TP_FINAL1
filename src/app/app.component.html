@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
+<style>
+  body {
+  margin: 0; /* Quita márgenes */
+  padding: 0; /* Quita padding */
+  font-family: Arial, sans-serif; /* Establece la fuente */
+}
+</style>
 <body>
   <div class="flex flex-col min-h-screen">
-    <app-header />
-
+    <app-header></app-header>
     <nav>
       <ul>    
         <li>
@@ -16,12 +23,13 @@
         </li>    
       </ul>
     </nav>
-
-
     <main>
       <router-outlet></router-outlet>
     </main>
   </div>
+
+
+
 </body>
 </html>
 

@@ -4,10 +4,72 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
+.container {
+  max-width: 1200px; /* Ancho máximo de la página */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  padding: 0 20px; /* Espaciado interno para evitar que el contenido esté pegado al borde */
+}
+
+.search-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+  justify-content: center; /* Espaciado uniforme entre los elementos */
+}
+
+.game-list {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en múltiples filas */
+  gap: 15px; /* Espacio entre las tarjetas */
+  justify-content: center; /* Centra las tarjetas en la línea */
+  align-items:flex-start;
+  padding: 20px; /* Espaciado interno alrededor del contenedor */
+}
+
+.game-card {
+  border: 1px solid #c0bfc2; /* Borde de la tarjeta */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 10px; /* Espaciado interno */
+  width: 200px; /* Ancho de la tarjeta */
+  height: 200px; /* Alto fijo */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center; /* Centra el texto */
+  background-color: #35075a; /* Color de fondo */
+  flex: 0 1 auto; /* Permite que las tarjetas ocupen el espacio adecuado */
+  max-width: 100%; /* Evita que la tarjeta se desborde */
+  margin: 10px; /* Espacio entre los cuadrados */
+  flex-direction: column; /* Coloca el contenido en una columna */
+  justify-content: center; /* Centra verticalmente el contenido */
+  align-items: center; /* Centra horizontalmente el contenido */
+  overflow: hidden; /* Oculta contenido que excede el tamaño del cuadrado */
+
+}
+
+.game-card img {
+  max-width: 100%; /* Asegura que la imagen no exceda el ancho del cuadrado */
+  height: auto; /* Mantiene la relación de aspecto */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+}
+
+.game-card h3 {
+  margin: 10px 0 5px; /* Espacio alrededor del título */
+  text-align: center; /* Centra el texto */
+}
+
+.game-card p {
+  margin: 0 10px; /* Espacio alrededor de la descripción */
+  text-align: center; /* Centra el texto */
+}
+
+
+
 </style>
 
 <div class="search-container">
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar juegos" />
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Nombre del juego" />
     <button (click)="searchGames()">Buscar</button>
   </div>
 
@@ -15,13 +77,15 @@
     {{ errorMessage }}
   </div>
   
-  <div class="game-results" *ngIf="games.length > 0">
-    <div *ngFor="let game of games" class="game-card">
-      <img *ngIf="game.cover?.url" [src]="game.cover.url" alt="{{ game.name }}" />
-      <h3>{{ game.name }}</h3>
-      <p *ngIf="game.summary">{{ game.summary }}</p>
-      <p *ngIf="game.rating">Rating: {{ game.rating }}</p>
+  <div *ngIf="games.length > 0">
+    <h3>Resultados:</h3>
+    <div class="game-list">
+      <div *ngFor="let game of games" class="game-card" (click)="detalleJuego(game.id)" style="cursor: pointer;">
+        <h4>{{ game.name }}</h4>
+        <img *ngIf="game.cover" [src]="game.cover.url" alt="{{ game.name }}" class="game-image" />
+        <!---<p>Calificación: {{ game.rating | number:'1.0-0' }} </p>  --->
+        </div>
+      </div>
     </div>
-  </div>
 
   

@@ -12,7 +12,6 @@ import { HeaderComponent } from "./shared/ui/header/header.component";
 
 @NgModule({
   declarations: [
-    BuscarJuegosComponent
   ],
   imports: [
     BrowserModule,

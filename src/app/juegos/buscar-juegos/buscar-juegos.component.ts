@@ -3,7 +3,29 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { BaseHttpService } from '../../shared/services/base-http.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { forkJoin, map} from 'rxjs';
+import { ActivatedRoute, RouterModule, Routes} from '@angular/router';
+import { Router } from '@angular/router';
+import { JuegosService } from '../acceso-juegos/juegos.service';
+import juegosRoute from '../ruta-juegos/juegos.route';
+
+
+interface Platform {
+  id: number;
+  name: string;
+  platform_logo?: {
+    url: string;
+  };
+  logoUrl?: string; // Agrega logoUrl como opcional
+}
+
+interface Game {
+  name: string;
+  cover?: { url: string };
+  summary: string;
+  rating: number;
+  platforms: Platform[];
+}
 
 @Component({
   selector: 'app-buscar-juegos',
@@ -15,37 +37,88 @@ import { Observable } from 'rxjs';
 export class BuscarJuegosComponent {
 
   private gamesApi = '/api/games';
+  private platformApi = '/api/platforms';
+  private genresApi = '/api/genres';
+  private ageRatingApi = '/api/age_ratings';
+  private releaseDatesApi = '/api/release_dates';
+  private artworksApi = '/api/artworks';
+  
 
   searchTerm: string = '';
   games: any[] = [];
   errorMessage: string = ''; //
+  selectedGame: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router:Router, private juegoService: JuegosService) {}
 
 
   searchGames() {
     this.errorMessage = '';
-    this.games = [];
+    ///this.games = [];
 
     const headers = new HttpHeaders({
       'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-      'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2'
+      'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
+      'Content-Type': 'text/plain'
     });
 
+    const buscarJuegos = this.http.post<any[]>(this.gamesApi, `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates; search "${this.searchTerm}"; where version_parent = null;`, {headers})
+    const buscarPlataformas = this.http.post <any[]>(this.platformApi, `fields id, name, abbreviation, platform_logo;`, { headers });
+    const buscarGeneros = this.http.post <any[]>(this.genresApi, `fields id, name;`, {headers});
+    const buscarRatingsEdad = this.http.post <any[]>(this.ageRatingApi, `fields id, category;`, {headers});
+    const buscarReleaseDates = this.http.post <any[]>(this.releaseDatesApi, `fields id, human;`, {headers});
+    const buscarArtworks = this.http.post <any[]>(this.artworksApi, `fields id, url;`, {headers});
+
+    forkJoin({
+      games: buscarJuegos,
+      platforms: buscarPlataformas,
+      genres: buscarGeneros,
+      ageRatings: buscarRatingsEdad,
+      releaseDates: buscarReleaseDates,
+      artworks: buscarArtworks
+    }).pipe(
+      map(response => {
+        console.log("Respuesta de plataformas:", response.platforms); // Verifica la lista completa de plataformas
+        response.games.forEach(game => {
+          game.platforms = response.platforms.filter(p => game.platforms?.includes(p.id));
+          game.genres = response.genres.filter(g => game.genres?.includes(g.id));
+          game.age_ratings = response.ageRatings.filter(ar => game.age_ratings?.includes(ar.id));
+          game.release_dates = response.releaseDates.filter(rd => game.release_dates?.includes(rd.id));
+          game.artworks = response.artworks.filter(aw => game.artworks?.includes(aw.id));
+        });
+      return response.games;
+  })
+).subscribe(data => {
+  this.games = data;
+  this.juegoService.setGames(this.games);
+
+});
+}
+
+/*
     this.http.post(this.gamesApi, 
-      `fields name, cover.url, summary, rating; search "${this.searchTerm}";`,
+      `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates; search "${this.searchTerm}"; where version_parent = null;`,
       { headers })
-        .subscribe((response: any) => {
-          this.games = response as any[];
+        .subscribe((gamesResponse: any) => {
+          this.games = gamesResponse;
+          this.juegoService.setGames(this.games);
           if(this.games.length ===0){
             this.errorMessage = 'No se encontraron juegos con ese título.'; // Mensaje de error
+          } else {
           }
         }, error => {
           this.errorMessage = 'Ocurrio un error al buscar juegos.';
         });
-
-
-
   }
+
+*/
+
+  detalleJuego(gameId: number) {
+    
+    this.router.navigate(['/games', gameId]);
+  }
+
+
+
 
 }
