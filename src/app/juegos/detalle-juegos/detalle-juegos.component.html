@@ -1,5 +1,4 @@
 <style>
-
 .detalleContainer{
 max-width: 600px;
   margin: 20px auto; 
@@ -42,12 +41,13 @@ font-size: 1.8em;
 
 </style>
 
+    <!-- Detalles principales -->
 <div class="detalleContainer" *ngIf="gameDetails">
     <h1>{{ gameDetails.name }}</h1>
     <img *ngIf="gameDetails.cover" [src]="gameDetails.cover.url" alt="{{ gameDetails.name }}" />
     <p>{{ gameDetails.summary }}</p> <hr>
 
-  <!-- Plataformas del juego -->
+  <!-- Plataformas, muestra MUY poca variedad por limitaciones de la API. Espera arreglo y funcionamiento con JSON Server -->
   <div *ngIf="gameDetails.platforms">
     <strong>Plataformas:</strong>
     <span *ngFor="let platform of gameDetails.platforms; let last = last">
@@ -56,14 +56,15 @@ font-size: 1.8em;
   </div>
 
     <hr>
-  <div *ngIf="gameDetails.release_dates && gameDetails.release_dates.length">
-    <strong>Fecha de Lanzamiento:</strong>
-    <span *ngFor="let date of gameDetails.release_dates; let last = last">
-      {{ date.human }}<span *ngIf="!last">, </span>
-    </span>
+
+    <!-- No funciona, pendiente de arreglo -->
+  <div *ngIf="gameDetails.release_dates">
+    <strong>Fecha de Lanzamiento Inicial:</strong>
+      {{gameDetails.release_dates[0].human }}    
   </div>
 <hr>
 
+         <!-- Funciona, espera ampliarse con JSON Server -->
     <strong>Género:</strong>
     <span *ngFor="let genre of gameDetails.genres; let last = last">
       {{ genre.name }}<span *ngIf="!last">, </span>
@@ -71,7 +72,7 @@ font-size: 1.8em;
 
     <hr>
 
- <!-- Rating del juego (sin decimales) -->
+ <!-- Calificacion de metacritic del juego, el number le quita todos los numeros para que esté sin decimal -->
  <div *ngIf="gameDetails.rating">
     <strong>Rating:</strong> {{ gameDetails.rating | number:'1.0-0' }}
   </div>

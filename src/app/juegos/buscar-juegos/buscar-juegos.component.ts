@@ -10,23 +10,6 @@ import { JuegosService } from '../acceso-juegos/juegos.service';
 import juegosRoute from '../ruta-juegos/juegos.route';
 
 
-interface Platform {
-  id: number;
-  name: string;
-  platform_logo?: {
-    url: string;
-  };
-  logoUrl?: string; // Agrega logoUrl como opcional
-}
-
-interface Game {
-  name: string;
-  cover?: { url: string };
-  summary: string;
-  rating: number;
-  platforms: Platform[];
-}
-
 @Component({
   selector: 'app-buscar-juegos',
   standalone: true,
@@ -62,11 +45,14 @@ export class BuscarJuegosComponent {
       'Content-Type': 'text/plain'
     });
 
-    const buscarJuegos = this.http.post<any[]>(this.gamesApi, `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates; search "${this.searchTerm}"; where version_parent = null;`, {headers})
+    ///Forkeo TODOS los llamados a la API y los hago de una vez. Juegos funciona bien al ser buscado, pero los demás deberian recorrer la API y chocamos con limitaciones. Para Plataformas, Generos, y Ratings de Edad, se puede usar JSON Server.
+    ///Artworks se encuentra pendiente.
+
+   
+    const buscarJuegos = this.http.post<any[]>(this.gamesApi, `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates.human; search "${this.searchTerm}"; where version_parent = null;`, {headers})
     const buscarPlataformas = this.http.post <any[]>(this.platformApi, `fields id, name, abbreviation, platform_logo;`, { headers });
     const buscarGeneros = this.http.post <any[]>(this.genresApi, `fields id, name;`, {headers});
     const buscarRatingsEdad = this.http.post <any[]>(this.ageRatingApi, `fields id, category;`, {headers});
-    const buscarReleaseDates = this.http.post <any[]>(this.releaseDatesApi, `fields id, human;`, {headers});
     const buscarArtworks = this.http.post <any[]>(this.artworksApi, `fields id, url;`, {headers});
 
     forkJoin({
@@ -74,16 +60,14 @@ export class BuscarJuegosComponent {
       platforms: buscarPlataformas,
       genres: buscarGeneros,
       ageRatings: buscarRatingsEdad,
-      releaseDates: buscarReleaseDates,
       artworks: buscarArtworks
     }).pipe(
       map(response => {
-        console.log("Respuesta de plataformas:", response.platforms); // Verifica la lista completa de plataformas
+        console.log("Respuesta de plataformas:", response.platforms); // Testeo: Solo muestra 10 consolas. Se soluciona con JSON Server
         response.games.forEach(game => {
           game.platforms = response.platforms.filter(p => game.platforms?.includes(p.id));
           game.genres = response.genres.filter(g => game.genres?.includes(g.id));
           game.age_ratings = response.ageRatings.filter(ar => game.age_ratings?.includes(ar.id));
-          game.release_dates = response.releaseDates.filter(rd => game.release_dates?.includes(rd.id));
           game.artworks = response.artworks.filter(aw => game.artworks?.includes(aw.id));
         });
       return response.games;
@@ -95,6 +79,7 @@ export class BuscarJuegosComponent {
 });
 }
 
+///El funcionamiento previo
 /*
     this.http.post(this.gamesApi, 
       `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates; search "${this.searchTerm}"; where version_parent = null;`,
@@ -103,7 +88,7 @@ export class BuscarJuegosComponent {
           this.games = gamesResponse;
           this.juegoService.setGames(this.games);
           if(this.games.length ===0){
-            this.errorMessage = 'No se encontraron juegos con ese título.'; // Mensaje de error
+            this.errorMessage = 'No se encontraron juegos con ese título.'; // Error si no hay juegos con la busqueda hecha
           } else {
           }
         }, error => {

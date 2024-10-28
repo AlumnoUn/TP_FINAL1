@@ -24,6 +24,9 @@ export class DetalleJuegosComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private juegoService: JuegosService) {}
 
+
+
+  ///Uso params para poder ir a la route especifica del game/id que necesite
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.gameId = +params['id'];
@@ -37,6 +40,9 @@ export class DetalleJuegosComponent implements OnInit {
 
 
     /*
+
+    Codigo previo de prueba
+
     const url = `/api/games`;
     const headers = new HttpHeaders({
       'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
@@ -46,7 +52,7 @@ export class DetalleJuegosComponent implements OnInit {
     const body = `fields name, cover.url, summary, rating, platforms; where id = ${this.gameId};`;
 
     
-    // Llama a la API con los headers necesarios para la autenticación
+    // Llamando a la api por los headers
     this.http.post(url, body, {headers}).subscribe(gameDetailsResponse => {
       console.log('Datos del juego: ', gameDetailsResponse);
       this.gameDetails = gameDetailsResponse;
