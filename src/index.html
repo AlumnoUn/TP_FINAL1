@@ -12,6 +12,51 @@
 </body>
 </html>
 
+<!--  metodo para agregar datos a /games del json:
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class GameService {
+  private jsonServerUrl = 'http://localhost:3000/games';
+
+  constructor(private http: HttpClient) {}
+
+  // Método para guardar un juego en json-server
+  saveGame(game: any) {
+    return this.http.post(this.jsonServerUrl, game);
+  }
+}
+
+este va en el servicio de usuario:
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+  private jsonServerUrl = 'http://localhost:3000/users';
+
+  constructor(private http: HttpClient) {}
+
+  // para registrar un usuario
+  registerUser(user: { name: string; password: string }) {
+    return this.http.post(this.jsonServerUrl, user);
+  }
+
+  // para autenticar un usuario
+  authenticateUser(name: string, password: string) {
+    return this.http
+      .get(`${this.jsonServerUrl}?name=${name}&password=${password}`)
+      .pipe(map((users: any) => users.length > 0));
+  }
+}
+
+-->
+
 <!--
     npm install -g json-server 
     Usar este comando para levantar el json-server:  json-server --watch db.json --port 3000
