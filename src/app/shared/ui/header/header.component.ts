@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,14 +8,20 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styles: ``
 })
-export class HeaderComponent {
+export class HeaderComponent{
 
     icono: number = 1;
-    icono2: string = '1.png';
+    iconoroute: string = `assets/images/${this.icono}.png`;
     getRandomNumber = (min: number, max: number) => {
         return Math.floor(min + Math.random() * max)
       }
-      
+
+
+  ngOnInit(): void {
+    this.icono = this.changePs1Icon(1,31);
+    this.iconoroute = `assets/images/${this.icono}.png`
+  }
+
     changePs1Icon(min: number, max:number){
         this.icono = this.getRandomNumber (min, max);
         return this.icono;
