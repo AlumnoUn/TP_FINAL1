@@ -42,14 +42,29 @@ export class BuscarJuegosComponent {
     const headers = new HttpHeaders({
       'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
       'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
-      'Content-Type': 'text/plain'
+      "Accept": "application/json"
     });
 
     ///Forkeo TODOS los llamados a la API y los hago de una vez. Juegos funciona bien al ser buscado, pero los demás deberian recorrer la API y chocamos con limitaciones. Para Plataformas, Generos, y Ratings de Edad, se puede usar JSON Server.
     ///Artworks se encuentra pendiente.
 
-   
-    const buscarJuegos = this.http.post<any[]>(this.gamesApi, `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates.human; search "${this.searchTerm}"; where version_parent = null;`, {headers})
+    ///Update: Todo esto NO es necesario. Puedo sacar TODO con /api/games/. Arreglar
+
+    const buscarJuegos = this.http.post<any[]>(this.gamesApi, 
+      `fields name, 
+      cover.url, 
+      summary, 
+      rating, 
+      platforms.name, 
+      platforms.abbreviation, 
+      id, 
+      age_ratings, 
+      genres.name, 
+      release_dates.human, 
+      screenshots.image_id,
+      screenshots.url;
+      search "${this.searchTerm}"; where version_parent = null;`, {headers})
+    /*
     const buscarPlataformas = this.http.post <any[]>(this.platformApi, `fields id, name, abbreviation, platform_logo;`, { headers });
     const buscarGeneros = this.http.post <any[]>(this.genresApi, `fields id, name;`, {headers});
     const buscarRatingsEdad = this.http.post <any[]>(this.ageRatingApi, `fields id, category;`, {headers});
@@ -63,9 +78,9 @@ export class BuscarJuegosComponent {
       artworks: buscarArtworks
     }).pipe(
       map(response => {
-        console.log("Respuesta de plataformas:", response.platforms); // Testeo: Solo muestra 10 consolas. Se soluciona con JSON Server
+        //console.log("Respuesta de plataformas:", response.platforms); // Testeo: Solo muestra 10 consolas. Se soluciona con JSON Server
         response.games.forEach(game => {
-          game.platforms = response.platforms.filter(p => game.platforms?.includes(p.id));
+          ///game.platforms = response.platforms.filter(p => game.platforms?.includes(p.id));
           game.genres = response.genres.filter(g => game.genres?.includes(g.id));
           game.age_ratings = response.ageRatings.filter(ar => game.age_ratings?.includes(ar.id));
           game.artworks = response.artworks.filter(aw => game.artworks?.includes(aw.id));
@@ -76,15 +91,11 @@ export class BuscarJuegosComponent {
   this.games = data;
   this.juegoService.setGames(this.games);
 
-});
-}
+});*/
 
 ///El funcionamiento previo
-/*
-    this.http.post(this.gamesApi, 
-      `fields name, cover.url, summary, rating, platforms, id, age_ratings, genres, release_dates; search "${this.searchTerm}"; where version_parent = null;`,
-      { headers })
-        .subscribe((gamesResponse: any) => {
+
+    buscarJuegos.subscribe((gamesResponse: any) => {
           this.games = gamesResponse;
           this.juegoService.setGames(this.games);
           if(this.games.length ===0){
@@ -95,15 +106,13 @@ export class BuscarJuegosComponent {
           this.errorMessage = 'Ocurrio un error al buscar juegos.';
         });
   }
-
-*/
-
   detalleJuego(gameId: number) {
     
     this.router.navigate(['/games', gameId]);
   }
 
 
-
-
 }
+
+
+
