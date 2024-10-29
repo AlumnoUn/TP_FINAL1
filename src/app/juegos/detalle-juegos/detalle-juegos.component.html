@@ -1,17 +1,41 @@
 <style>
 .detalleContainer{
-max-width: 600px;
-  margin: 20px auto; 
+  display: flex;
+  gap: 20px; /* Espacio entre la portada y el contenido */
   padding: 20px;
-  border: 1px solid #ddd;
+  background-color: #3c0073; /* Color de fondo */
+  border-radius: 10px;
+  max-width: 1200px; /* Ancho máximo para widescreen */
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+.cover-container{
+  display: flex;
+  border-right: 2px solid #fff; 
+  padding-right: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.coverimagen{
+  width: 200%;
+  max-width: 765px;
+  height: auto;
+  max-height: 900px; 
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #6323ca;
+  display: table-cell; 
+  vertical-align: middle ;
+}
+
+.content-container{
+  flex:1;
+  color:#fff;
   text-align: center;
 }
+
 .detalleContainer h1 {
 font-size: 1.8em;
-  color: #b5c901;
+  color: #e6ff04;
   margin-bottom: 10px;
 }
 
@@ -20,79 +44,71 @@ font-size: 1.8em;
   color: #ffffff;
   line-height: 1.5;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .detalleContainer img {
   max-width: 100%;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: auto; /* Mantiene la relación de aspecto */
+  height: auto; 
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-.artwork img {
-  width: 80px; /* Tamaño de la miniatura */
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+.botonesNextBack{
+  background-color: transparent;
+  border: none;
+  font-size: 1.5em;
+  color: #fff;
+  cursor: pointer;
+  margin: 0 10px;
 }
-
-.screenshots {
-  width: 800;
-  height: 600;
-  display: block;
-}
-
 </style>
 
-    <!-- Detalles principales -->
+
 <div class="detalleContainer" *ngIf="gameDetails">
-    <h1>{{ gameDetails.name }}</h1>
-    <img *ngIf="gameDetails.cover" [src]="gameDetails.cover.url" alt="{{ gameDetails.name }}" />
-    <p>{{ gameDetails.summary }}</p> <hr>
-
-  <!-- Plataformas, muestra MUY poca variedad por limitaciones de la API. Espera arreglo y funcionamiento con JSON Server -->
-  <div *ngIf="gameDetails.platforms">
-    <strong>Plataformas:</strong>
-    <span *ngFor="let platform of gameDetails.platforms; let last = last">
-      {{ platform.name }} ({{ platform.abbreviation }})
-      <!---
-        Esta es la imagen del logo pero queda TAN feo
-        <img *ngIf="platform.platform_logo" [src]="platform.platform_logo.url" alt="{{platform.name}}" />--->
-      <span *ngIf="!last">, </span>
-    </span>
+  <div class="cover-container">
+    <img class="coverimagen" *ngIf="gameDetails.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_big/' + gameDetails.cover.image_id + '.jpg'" alt="{{ gameDetails.name }}" />
   </div>
 
+    <div class="content-container">
+      <h1>{{ gameDetails.name }}</h1>
+      <p>{{ gameDetails.summary }}</p>
+      <hr>
+      <div *ngIf="gameDetails.platforms">
+        <strong>Plataformas:</strong>
+        <span *ngFor="let platform of gameDetails.platforms; let last = last">
+          {{ platform.name }} ({{ platform.abbreviation }})
+          <span *ngIf="!last">, </span>
+        </span>
+      </div>
+      <hr>
+
+      <div *ngIf="gameDetails.release_dates">
+        <strong>Fecha de Lanzamiento Inicial:</strong>
+          {{gameDetails.release_dates[0].human }}    
+      </div>
+      <hr>
+    
+        <strong>Género:</strong>
+        <span *ngFor="let genre of gameDetails.genres; let last = last">
+          {{ genre.name }}<span *ngIf="!last">, </span>
+        </span>
+        <hr>
+    
+     <!-- Calificacion de metacritic del juego, el number le quita todos los numeros para que esté sin decimal -->
+     <div *ngIf="gameDetails.rating">
+        <strong>Rating:</strong> {{ gameDetails.rating | number:'1.0-0' }}
+      </div>
     <hr>
-
-    <!-- No funciona, pendiente de arreglo -->
-  <div *ngIf="gameDetails.release_dates">
-    <strong>Fecha de Lanzamiento Inicial:</strong>
-      {{gameDetails.release_dates[0].human }}    
-  </div>
-<hr>
-
-         <!-- Funciona, espera ampliarse con JSON Server -->
-    <strong>Género:</strong>
-    <span *ngFor="let genre of gameDetails.genres; let last = last">
-      {{ genre.name }}<span *ngIf="!last">, </span>
-    </span>
-
     <hr>
-
- <!-- Calificacion de metacritic del juego, el number le quita todos los numeros para que esté sin decimal -->
- <div *ngIf="gameDetails.rating">
-    <strong>Rating:</strong> {{ gameDetails.rating | number:'1.0-0' }}
-  </div>
-    <hr>
-
-  <div *ngIf="gameDetails.screenshots">
-      <span *ngFor="let screenshots of gameDetails.screenshots; let last = last">
-        <img class="screenshots" *ngIf="screenshots" [src]="'//images.igdb.com/igdb/image/upload/t_screenshot_big/' + screenshots.image_id + '.jpg'" alt="{{ gameDetails.name }}" />
-      </span>
-  </div>
-  <hr>
+      <div *ngIf="gameDetails.screenshots">
+            <img *ngIf="gameDetails.screenshots" [src]="'//images.igdb.com/igdb/image/upload/t_screenshot_big/' + gameDetails.screenshots[indiceImagenActual].image_id + '.jpg'" alt="{{ gameDetails.name }}" />
+      </div>
+      <button class="botonesNextBack" (click)="anteriorImagen(gameDetails.screenshots)">⬅️</button>
+      <button class="botonesNextBack" (click)="siguienteImagen(gameDetails.screenshots)">➡️</button>
+    </div>
 </div>
 

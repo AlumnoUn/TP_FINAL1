@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { JuegosService } from '../acceso-juegos/juegos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-juegos',
@@ -21,9 +22,9 @@ export class DetalleJuegosComponent implements OnInit {
   private gamesApi = '/api/games';
   errorMessage: string = '';
 
+  indiceImagenActual: number = 0;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private juegoService: JuegosService) {}
-
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router:Router, private juegoService: JuegosService) {}
 
 
   ///Uso params para poder ir a la route especifica del game/id que necesite
@@ -33,33 +34,13 @@ export class DetalleJuegosComponent implements OnInit {
       this.gameDetails = this.juegoService.getGameById(this.gameId);
     });
   }
+
+  siguienteImagen(imagen: any[]){
+    this.indiceImagenActual = (this.indiceImagenActual + 1) % imagen.length;
+  }
+
+  anteriorImagen(imagen: any[]){
+    this.indiceImagenActual = (this.indiceImagenActual - 1 + imagen.length) % imagen.length;
+  }
+
 }
-    
-
-
-
-
-    /*
-
-    Codigo previo de prueba
-
-    const url = `/api/games`;
-    const headers = new HttpHeaders({
-      'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-      'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
-      'Content-Type': 'text/plain'
-    });
-    const body = `fields name, cover.url, summary, rating, platforms; where id = ${this.gameId};`;
-
-    
-    // Llamando a la api por los headers
-    this.http.post(url, body, {headers}).subscribe(gameDetailsResponse => {
-      console.log('Datos del juego: ', gameDetailsResponse);
-      this.gameDetails = gameDetailsResponse;
-      this.cdr.detectChanges();
-    }, error => {
-      this.errorMessage = 'Ocurrio un error al buscar juegos.';
-    });
-  }*/
-
-  

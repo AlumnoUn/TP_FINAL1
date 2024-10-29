@@ -82,8 +82,11 @@
     <div class="game-list">
       <div *ngFor="let game of games" class="game-card" (click)="detalleJuego(game.id)" style="cursor: pointer;">
         <h4>{{ game.name }}</h4>
-        <img *ngIf="game.cover" [src]="game.cover.url" alt="{{ game.name }}" class="game-image" />
-        <!---<p>Calificación: {{ game.rating | number:'1.0-0' }} </p>  --->
+
+        <img *ngIf="game.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg'" alt="{{ game.name }}" />
+        <!---<p>Calificación: {{ game.rating | number:'1.0-0' }} </p> 
+                <img *ngIf="game.cover" [src]="game.cover.url" alt="{{ game.name }}" class="game-image" />
+        --->
         </div>
       </div>
     </div>
