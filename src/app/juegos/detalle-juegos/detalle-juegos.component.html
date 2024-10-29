@@ -19,6 +19,7 @@
 
 .coverimagen{
   width: 200%;
+  border: 2px solid #ffffff; 
   max-width: 765px;
   height: auto;
   max-height: 900px; 
@@ -65,6 +66,46 @@ font-size: 1.8em;
   cursor: pointer;
   margin: 0 10px;
 }
+
+.metacriticScore{
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+}
+
+.rating-max{
+  background-color: #2d702f
+}
+
+.rating-good{
+  background-color: #51cb55
+}
+
+.rating-mid{
+  background-color: #edfe00;
+  color: black;
+}
+
+
+.rating-bad{
+  background-color: #fe6600;
+  color: black;
+}
+
+.rating-dead{
+  background-color: #fe0000;
+}
+
+.rating-unknown {
+  background-color: #cccccc; /* Color para cuando no hay rating */
+  color: #000000;
+}
+
+
+
+
 </style>
 
 
@@ -99,16 +140,20 @@ font-size: 1.8em;
         <hr>
     
      <!-- Calificacion de metacritic del juego, el number le quita todos los numeros para que esté sin decimal -->
-     <div *ngIf="gameDetails.rating">
-        <strong>Rating:</strong> {{ gameDetails.rating | number:'1.0-0' }}
-      </div>
+     <div *ngIf="gameDetails.rating; else noRating" [ngClass]="['metacriticScore', colorRating(gameDetails.rating)]">
+      <strong>Rating: </strong>{{ gameDetails.rating | number:'1.0-0' || 'Sin rating' }}
+    </div>
     <hr>
     <hr>
       <div *ngIf="gameDetails.screenshots">
             <img *ngIf="gameDetails.screenshots" [src]="'//images.igdb.com/igdb/image/upload/t_screenshot_big/' + gameDetails.screenshots[indiceImagenActual].image_id + '.jpg'" alt="{{ gameDetails.name }}" />
       </div>
+      <hr>
       <button class="botonesNextBack" (click)="anteriorImagen(gameDetails.screenshots)">⬅️</button>
       <button class="botonesNextBack" (click)="siguienteImagen(gameDetails.screenshots)">➡️</button>
     </div>
 </div>
 
+<ng-template #noRating>
+  <div class="metacriticScore rating-unknown">Sin rating</div>
+</ng-template>

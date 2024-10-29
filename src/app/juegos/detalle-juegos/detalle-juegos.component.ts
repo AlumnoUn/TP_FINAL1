@@ -42,5 +42,22 @@ export class DetalleJuegosComponent implements OnInit {
   anteriorImagen(imagen: any[]){
     this.indiceImagenActual = (this.indiceImagenActual - 1 + imagen.length) % imagen.length;
   }
+  
+
+  colorRating(rating: number): string {
+    if (rating >= 90) {
+      return 'rating-max';
+    } else if (rating >= 75) {
+      return 'rating-good';
+    } else if (rating >= 50) {
+      return 'rating-mid';
+    } else if (rating >= 20) {
+      return 'rating-bad';
+    } else if (rating >= 1) {
+      return 'rating-dead';}
+      else {
+      return 'rating-unknown';
+    }
+  }
 
 }

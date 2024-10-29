@@ -78,6 +78,22 @@ export class BuscarJuegosComponent {
     this.router.navigate(['/games', gameId]);
     }
 
+    colorRating(rating: number): string {
+      if (rating >= 90) {
+        return 'rating-max';
+      } else if (rating >= 75) {
+        return 'rating-good';
+      } else if (rating >= 50) {
+        return 'rating-mid';
+      } else if (rating >= 20) {
+        return 'rating-bad';
+      } else if (rating >= 1) {
+        return 'rating-dead';}
+        else {
+        return 'rating-unknown';
+      }
+    }
+
 
 }
 

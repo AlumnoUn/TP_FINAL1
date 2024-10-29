@@ -27,11 +27,11 @@
 }
 
 .game-card {
-  border: 1px solid #c0bfc2; 
+  border: 3px solid #ffffff; 
   border-radius: 8px;
   padding: 10px; 
-  width: 200px;
-  height: 200px; 
+  width: 300px;
+  height: 300px; 
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
   text-align: center; 
   background-color: #35075a; 
@@ -47,6 +47,7 @@
 
 .game-card img {
   max-width: 100%; 
+  border: 1px solid #ffffff; 
   height: auto;
   margin-left: auto;
   margin-right: auto;
@@ -63,6 +64,51 @@
   margin: 0 10px; 
   text-align: center; 
 }
+
+.consolaslist{
+  border-radius: 12px;
+  font-size: 12px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.metacriticScore{
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+}
+
+.rating-max{
+  background-color: #2d702f
+}
+
+.rating-good{
+  background-color: #51cb55
+}
+
+.rating-mid{
+  background-color: #edfe00;
+  color: black;
+}
+
+
+.rating-bad{
+  background-color: #fe6600;
+  color: black;
+}
+
+.rating-dead{
+  background-color: #fe0000;
+}
+
+.rating-unknown {
+  background-color: #cccccc; /* Color para cuando no hay rating */
+  color: #000000;
+}
+
+
 
 
 
@@ -83,12 +129,24 @@
       <div *ngFor="let game of games" class="game-card" (click)="detalleJuego(game.id)" style="cursor: pointer;">
         <h4>{{ game.name }}</h4>
 
-        <img *ngIf="game.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg'" alt="{{ game.name }}" />
-        <!---<p>Calificación: {{ game.rating | number:'1.0-0' }} </p> 
-                <img *ngIf="game.cover" [src]="game.cover.url" alt="{{ game.name }}" class="game-image" />
-        --->
+        <img *ngIf="game.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_med/' + game.cover.image_id + '.jpg'" alt="{{ game.name }}" />
+        <span class="consolaslist" *ngFor="let platform of game.platforms; let last = last">
+          {{ platform.abbreviation }}
+          <span *ngIf="!last">, </span>
+        </span>
+        <hr>
+        <div *ngIf="game.rating; else noRating" [ngClass]="['metacriticScore', colorRating(game.rating)]">
+          {{ game.rating | number:'1.0-0' || 'Sin rating' }}
+        </div>
+        
         </div>
       </div>
+
+      <ng-template #noRating>
+        <div class="metacriticScore rating-unknown">Sin rating</div>
+      </ng-template>
+
+
     </div>
 
   
