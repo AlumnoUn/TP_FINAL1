@@ -39,6 +39,12 @@ font-size: 1.8em;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.screenshots {
+  width: 800;
+  height: 600;
+  display: block;
+}
+
 </style>
 
     <!-- Detalles principales -->
@@ -51,7 +57,11 @@ font-size: 1.8em;
   <div *ngIf="gameDetails.platforms">
     <strong>Plataformas:</strong>
     <span *ngFor="let platform of gameDetails.platforms; let last = last">
-      {{ platform.name }}<span *ngIf="!last">, </span>
+      {{ platform.name }} ({{ platform.abbreviation }})
+      <!---
+        Esta es la imagen del logo pero queda TAN feo
+        <img *ngIf="platform.platform_logo" [src]="platform.platform_logo.url" alt="{{platform.name}}" />--->
+      <span *ngIf="!last">, </span>
     </span>
   </div>
 
@@ -76,9 +86,13 @@ font-size: 1.8em;
  <div *ngIf="gameDetails.rating">
     <strong>Rating:</strong> {{ gameDetails.rating | number:'1.0-0' }}
   </div>
-
     <hr>
 
-    <hr>
+  <div *ngIf="gameDetails.screenshots">
+      <span *ngFor="let screenshots of gameDetails.screenshots; let last = last">
+        <img class="screenshots" *ngIf="screenshots" [src]="'//images.igdb.com/igdb/image/upload/t_screenshot_big/' + screenshots.image_id + '.jpg'" alt="{{ gameDetails.name }}" />
+      </span>
+  </div>
+  <hr>
 </div>
 
