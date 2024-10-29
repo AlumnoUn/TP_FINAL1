@@ -1,0 +1,94 @@
+<style>
+    .error-message {
+  color: red; /* Error en rojo, porque obvio */
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.container {
+  max-width: 1200px; 
+  margin: 0 auto; 
+  padding: 0 20px; 
+}
+
+.search-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+.game-list {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 15px; 
+  justify-content: center; 
+  align-items:flex-start;
+  padding: 20px; 
+}
+
+.game-card {
+  border: 1px solid #c0bfc2; 
+  border-radius: 8px;
+  padding: 10px; 
+  width: 200px;
+  height: 200px; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+  text-align: center; 
+  background-color: #35075a; 
+  flex: 0 1 auto; 
+  max-width: 100%; 
+  margin: 10px; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  overflow: hidden; 
+
+}
+
+.game-card img {
+  max-width: 100%; 
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+}
+
+.game-card h3 {
+  margin: 10px 0 5px; 
+  text-align: center;
+}
+
+.game-card p {
+  margin: 0 10px; 
+  text-align: center; 
+}
+
+
+
+</style>
+
+<div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Nombre del juego" />
+    <button (click)="searchGames()">Buscar</button>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="games.length > 0">
+    <h3>Resultados:</h3>
+    <div class="game-list">
+      <div *ngFor="let game of games" class="game-card" (click)="detalleJuego(game.id)" style="cursor: pointer;">
+        <h4>{{ game.name }}</h4>
+
+        <img *ngIf="game.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_small/' + game.cover.image_id + '.jpg'" alt="{{ game.name }}" />
+        <!---<p>Calificación: {{ game.rating | number:'1.0-0' }} </p> 
+                <img *ngIf="game.cover" [src]="game.cover.url" alt="{{ game.name }}" class="game-image" />
+        --->
+        </div>
+      </div>
+    </div>
+
+  
