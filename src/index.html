@@ -4,64 +4,13 @@
   <meta charset="utf-8">
   <title>GameDex</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body> 
   <app-root></app-root>
 </body>
 </html>
-
-<!--  metodo para agregar datos a /games del json:
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class GameService {
-  private jsonServerUrl = 'http://localhost:3000/games';
-
-  constructor(private http: HttpClient) {}
-
-  // Método para guardar un juego en json-server
-  saveGame(game: any) {
-    return this.http.post(this.jsonServerUrl, game);
-  }
-}
-
-este va en el servicio de usuario:
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class UserService {
-  private jsonServerUrl = 'http://localhost:3000/users';
-
-  constructor(private http: HttpClient) {}
-
-  // para registrar un usuario
-  registerUser(user: { name: string; password: string }) {
-    return this.http.post(this.jsonServerUrl, user);
-  }
-
-  // para autenticar un usuario
-  authenticateUser(name: string, password: string) {
-    return this.http
-      .get(`${this.jsonServerUrl}?name=${name}&password=${password}`)
-      .pipe(map((users: any) => users.length > 0));
-  }
-}
-
--->
-
-<!--
-    npm install -g json-server 
-    Usar este comando para levantar el json-server:  json-server --watch db.json --port 3000
-     y en el navegador: http://localhost:3000/  
--->
 
 <!--
 42e39ea074fd4e738d0f797bd69073e1

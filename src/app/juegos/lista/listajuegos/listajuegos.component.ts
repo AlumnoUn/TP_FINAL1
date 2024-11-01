@@ -14,12 +14,4 @@ import { JuegosService } from '../../acceso-juegos/juegos.service';
 
 export default class ListajuegosComponent {
 
-private juegosService = inject (JuegosService);
-
-  constructor() { 
-
-    this.juegosService.getJuegos().subscribe((juegos) => {
-      console.log(juegos);
-    });
-  }
 }
