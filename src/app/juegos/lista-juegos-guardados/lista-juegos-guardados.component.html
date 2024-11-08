@@ -296,17 +296,14 @@ button {
             <p>No tienes juegos guardados en tu colección.</p>
          </div>
         </div>
-
-        <div class="pagination-controls">
-          <button (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
-          <span>Página {{ paginaActual }}</span>
-          <button (click)="siguientePagina()" [disabled]="">Siguiente</button>
-        </div>
-
-
         <ng-template #noRating>
           <div class="metacriticScore rating-unknown">Sin rating</div>
         </ng-template>
+  </div>
+  <div class="pagination-controls">
+    <button (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
+    <span>Página {{ paginaActual }}</span>
+    <button (click)="siguientePagina()" [disabled]="">Siguiente</button>
   </div>
 
   <div *ngIf="mostrarDetalles && gameDetails" class="detalleContainer">

@@ -40,13 +40,13 @@ export class ListaJuegosGuardadosComponent {
   cargaJuegos(): void {
     this.cargando = true;
     const start = (this.paginaActual - 1) * this.juegosPorPagina;
-    this.guardaJuegos.getGames(start, this.juegosPorPagina).subscribe(
+    this.guardaJuegos.getGames(start, this.juegosPorPagina + 1).subscribe(
       (response: any[]) => {       
         if (response.length > 0)
         {    
-          this.games = response.sort((a, b) => a.created_at - b.created_at);
+          this.games = response.slice(0, this.juegosPorPagina).sort((a, b) => a.created_at - b.created_at);
           this.cargando = false;
-          this.continua = response.length === this.juegosPorPagina;
+          this.continua = response.length > this.juegosPorPagina;
           console.log('Juegos en esta página:', this.games);
         }
         else{
