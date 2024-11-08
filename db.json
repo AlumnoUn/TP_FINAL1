@@ -1,0 +1,193 @@
+{
+  "games": [
+    {
+      "id": "7f5c",
+      "juegoId": 2566,
+      "name": "Dragon Ball Z: Budokai 3",
+      "userId": 1,
+      "image_id": "co6dfo",
+      "rating": 79.81637816146599,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "bc56",
+      "juegoId": 103221,
+      "name": "Tetris Effect",
+      "userId": 1,
+      "image_id": "co2kfy",
+      "rating": 87.32431879471676,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "3135",
+      "juegoId": 1530,
+      "name": "Jak 3",
+      "userId": 1,
+      "image_id": "co6kks",
+      "rating": 75.38339902484309,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "92d7",
+      "juegoId": 26758,
+      "name": "Super Mario Odyssey",
+      "userId": 1,
+      "image_id": "co1mxf",
+      "rating": 89.36974591514789,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "9dad",
+      "juegoId": 90101,
+      "name": "Super Smash Bros. Ultimate",
+      "userId": 1,
+      "image_id": "co2255",
+      "rating": 87.0919614644607,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "9c4e",
+      "juegoId": 1004,
+      "name": "The Matrix: Path of Neo",
+      "userId": 1,
+      "image_id": "co1p2r",
+      "rating": 66.88089620896386,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "2f6d",
+      "juegoId": 481,
+      "name": "Silent Hill 2",
+      "userId": 1,
+      "image_id": "co2vyg",
+      "rating": 91.38313583620933,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "a597",
+      "juegoId": 966,
+      "name": "Resident Evil 3: Nemesis",
+      "userId": 1,
+      "image_id": "co2vvb",
+      "rating": 81.0094870412965,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "f821",
+      "juegoId": 1744,
+      "name": "Mega Man X4",
+      "userId": 1,
+      "image_id": "co8ste",
+      "rating": 84.31831694564917,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "8a3b",
+      "juegoId": 551,
+      "name": "God of War II",
+      "userId": 1,
+      "image_id": "co3dik",
+      "rating": 85.72363336029517,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "aa66",
+      "juegoId": 4158,
+      "name": "Sonic Riders",
+      "userId": 1,
+      "image_id": "co3vnv",
+      "rating": 66.7005464200585,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "c944",
+      "juegoId": 19565,
+      "name": "Marvel's Spider-Man",
+      "userId": 1,
+      "image_id": "co1r77",
+      "rating": 87.156008245929,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "3a0f",
+      "juegoId": 306147,
+      "name": "Marvel vs. Capcom Fighting Collection: Arcade Classics",
+      "userId": 1,
+      "image_id": "co8tax",
+      "rating": 0,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "96c1",
+      "juegoId": 284716,
+      "name": "Sonic X Shadow Generations",
+      "userId": 1,
+      "image_id": "co8byo",
+      "rating": 0,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "8208",
+      "juegoId": 2174,
+      "name": "Sonic & All-Stars Racing Transformed",
+      "userId": 1,
+      "image_id": "co1zvw",
+      "rating": 80.07253519020621,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "ea9e",
+      "juegoId": 506,
+      "name": "Sonic Generations",
+      "userId": 1,
+      "image_id": "co1zvv",
+      "rating": 78.00139519191045,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "e85e",
+      "juegoId": 3896,
+      "name": "Dragon Ball Z: Sagas",
+      "userId": 1,
+      "image_id": "co3jfv",
+      "rating": 48.46244189933276,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "db72",
+      "juegoId": 1528,
+      "name": "Jak and Daxter: The Precursor Legacy",
+      "userId": 1,
+      "image_id": "co1w7q",
+      "rating": 80.23360827836308,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "56ea",
+      "juegoId": 261713,
+      "name": "Portal 64",
+      "userId": 1,
+      "image_id": "co7m2i",
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    }
+  ]
+}

@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
     "apicalypse": "^0.3.1",
+    "json-server": "^1.0.0-beta.3",
     "ngxtension": "^4.0.0",
     "request": "^2.88.2",
     "rxjs": "~7.8.0",

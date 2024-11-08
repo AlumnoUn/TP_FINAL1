@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BaseHttpService } from './shared/services/base-http.service';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/ui/header/header.component";
+import { DetalleJuegosComponent } from './juegos/detalle-juegos/detalle-juegos.component';
 
 
 
@@ -19,6 +20,7 @@ import { HeaderComponent } from "./shared/ui/header/header.component";
     CommonModule,
     HeaderComponent,
     BuscarJuegosComponent,
+    DetalleJuegosComponent,
     CommonModule,
 ],
   providers: [],

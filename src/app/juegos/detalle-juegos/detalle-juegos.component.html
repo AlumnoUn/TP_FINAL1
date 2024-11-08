@@ -41,7 +41,7 @@ font-size: 1.8em;
 }
 
 .detalleContainer p {
-  font-size: 0.6em;
+  font-size: 0.7em;
   color: #ffffff;
   line-height: 1.5;
   margin-bottom: 20px;
@@ -103,11 +103,30 @@ font-size: 1.8em;
   color: #000000;
 }
 
+  .iconoyoutube {
+margin:auto;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+
+.division{
+  border: 1px solid white;
+  margin: 10px 0;
+}
+
+button {
+  background-color: #e6e6e6; /* Puedes ajustar el color si quieres */
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
 
 
 
 </style>
-
 
 <div class="detalleContainer" *ngIf="gameDetails">
   <div class="cover-container">
@@ -138,20 +157,41 @@ font-size: 1.8em;
           {{ genre.name }}<span *ngIf="!last">, </span>
         </span>
         <hr>
+
+        <strong>Desarrolladores</strong>
+        <span *ngFor="let compania of gameDetails.involved_companies; let last = last">
+            {{ compania.company.name }}<span *ngIf="!last">, </span>     
+        </span>
+        <hr>
     
      <!-- Calificacion de metacritic del juego, el number le quita todos los numeros para que esté sin decimal -->
      <div *ngIf="gameDetails.rating; else noRating" [ngClass]="['metacriticScore', colorRating(gameDetails.rating)]">
-      <strong>Rating: </strong>{{ gameDetails.rating | number:'1.0-0' || 'Sin rating' }}
+      <strong>Metascore: </strong>{{ gameDetails.rating | number:'1.0-0' || 'Sin rating' }}
     </div>
+    <hr>
+
+    <div *ngIf="gameDetails.videos">
+      <a [href]="urlVideoYoutube + gameDetails.videos[0].video_id" target="_blank" rel="noopener noreferrer">
+        <img class="iconoyoutube" src="assets/images/iconoyt.png" alt="Icono de Ejemplo" />
+      </a>
+    </div>
+
+
     <hr>
     <hr>
       <div *ngIf="gameDetails.screenshots">
             <img *ngIf="gameDetails.screenshots" [src]="'//images.igdb.com/igdb/image/upload/t_screenshot_big/' + gameDetails.screenshots[indiceImagenActual].image_id + '.jpg'" alt="{{ gameDetails.name }}" />
       </div>
       <hr>
+      <div>
       <button class="botonesNextBack" (click)="anteriorImagen(gameDetails.screenshots)">⬅️</button>
       <button class="botonesNextBack" (click)="siguienteImagen(gameDetails.screenshots)">➡️</button>
     </div>
+    <hr class="division">
+    <div>
+        <button (click)="saveGame()">Guardar juego</button>        
+    </div>
+    
 </div>
 
 <ng-template #noRating>
