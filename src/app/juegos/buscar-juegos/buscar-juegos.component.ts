@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { BaseHttpService } from '../../shared/services/base-http.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { forkJoin, map} from 'rxjs';
 import { ActivatedRoute, RouterModule, Routes} from '@angular/router';
 import { Router } from '@angular/router';
 import { JuegosService } from '../acceso-juegos/juegos.service';
-import juegosRoute from '../ruta-juegos/juegos.route';
 
 
 @Component({

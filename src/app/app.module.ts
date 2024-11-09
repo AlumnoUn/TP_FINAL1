@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { BuscarJuegosComponent } from './juegos/buscar-juegos/buscar-juegos.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { BaseHttpService } from './shared/services/base-http.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./shared/ui/header/header.component";
 import { DetalleJuegosComponent } from './juegos/detalle-juegos/detalle-juegos.component';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app.routes';
 
 
 
@@ -15,6 +17,8 @@ import { DetalleJuegosComponent } from './juegos/detalle-juegos/detalle-juegos.c
   declarations: [
   ],
   imports: [
+    AppRoutingModule,
+    AppComponent,
     BrowserModule,
     FormsModule,
     CommonModule,
@@ -22,6 +26,10 @@ import { DetalleJuegosComponent } from './juegos/detalle-juegos/detalle-juegos.c
     BuscarJuegosComponent,
     DetalleJuegosComponent,
     CommonModule,
+    AppComponent,
+    SharedModule,
+    RouterModule,
+    ReactiveFormsModule
 ],
   providers: [],
   bootstrap: []

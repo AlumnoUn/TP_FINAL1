@@ -1,4 +1,11 @@
 {
+  "users": [
+    {
+      "id": "1180",
+      "username": "Alan",
+      "password": "123"
+    }
+  ],
   "games": [
     {
       "id": "7f5c",
