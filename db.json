@@ -220,6 +220,36 @@
       "rating": 93.03934762702465,
       "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
       "precioId": 0
+    },
+    {
+      "id": "1fbf",
+      "juegoId": 3278,
+      "name": "Garry's Mod",
+      "userId": "1180",
+      "image_id": "co8pgw",
+      "rating": 79.24144415182359,
+      "plataforma": "PC (Microsoft Windows)",
+      "precioId": 0
+    },
+    {
+      "id": "629a",
+      "juegoId": 418,
+      "name": "Final Fantasy X",
+      "userId": "1180",
+      "image_id": "co1tr1",
+      "rating": 87.87932770264183,
+      "plataforma": "PlayStation 2",
+      "precioId": 0
+    },
+    {
+      "id": "ae07",
+      "juegoId": 1971,
+      "name": "Manhunt",
+      "userId": "1180",
+      "image_id": "co2lcm",
+      "rating": 78.19223476755566,
+      "plataforma": "PC (Microsoft Windows)",
+      "precioId": 0
     }
   ]
 }

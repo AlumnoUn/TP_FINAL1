@@ -188,6 +188,13 @@ button {
       <button class="botonesNextBack" (click)="siguienteImagen(gameDetails.screenshots)">➡️</button>
     </div>
     <hr class="division">
+
+    <div *ngIf="gameDetails.platforms">
+      <strong>Selecciona la Plataforma:</strong>
+      <select [(ngModel)]="plataformaSeleccionada">
+        <option *ngFor="let platform of gameDetails.platforms" [value]="platform.name">{{ platform.name }}</option>
+      </select>
+    </div>
     <div>
         <button (click)="saveGame()">Guardar juego</button>        
     </div>

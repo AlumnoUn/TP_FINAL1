@@ -31,6 +31,7 @@ export class DetalleJuegosComponent implements OnInit {
 
   indiceImagenActual: number = 0;
 
+  plataformaSeleccionada: string = '';
 
   constructor(private http: HttpClient, 
     private route: ActivatedRoute, 
@@ -70,7 +71,7 @@ export class DetalleJuegosComponent implements OnInit {
       userId: currentUser?.id,
       image_id: this.gameDetails.cover.image_id,
       rating: this.gameDetails.rating,
-      plataforma: 'Ta pendiente agregar (Eleccion de usuario)',
+      plataforma: this.plataformaSeleccionada,
       precioId: 0,
     }
     this.jsonService.saveGame(juegoAGuardar).subscribe((response) => {
