@@ -1,4 +1,16 @@
 {
+  "users": [
+    {
+      "id": "1180",
+      "username": "Alan",
+      "password": "123"
+    },
+    {
+      "id": "203e",
+      "username": "Rodri",
+      "password": "123"
+    }
+  ],
   "games": [
     {
       "id": "7f5c",
@@ -186,6 +198,46 @@
       "name": "Portal 64",
       "userId": 1,
       "image_id": "co7m2i",
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "3d03",
+      "juegoId": 250616,
+      "name": "Helldivers 2",
+      "userId": "203e",
+      "image_id": "co741o",
+      "rating": 81.6893183256465,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "1416",
+      "juegoId": 2570,
+      "name": "Dragon Ball Z: Infinite World",
+      "userId": "203e",
+      "image_id": "co3tse",
+      "rating": 60.2835093994669,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "d324",
+      "juegoId": 2564,
+      "name": "Dragon Ball Z: Budokai 2",
+      "userId": "203e",
+      "image_id": "co1u7b",
+      "rating": 71.55747340672703,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
+    },
+    {
+      "id": "120a",
+      "juegoId": 135999,
+      "name": "Tetris Effect: Connected",
+      "userId": "203e",
+      "image_id": "co7kus",
+      "rating": 93.03934762702465,
       "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
       "precioId": 0
     }
