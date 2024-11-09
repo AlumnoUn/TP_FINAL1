@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { JuegosService } from '../acceso-juegos/juegos.service';
 import { Router } from '@angular/router';
 import { GuardaJuegosService } from '../../service/guarda-juegos.service';
+import { AuthService } from '../../auth/service/auth.service';
 
 @Component({
   selector: 'app-detalle-juegos',
@@ -36,7 +37,8 @@ export class DetalleJuegosComponent implements OnInit {
     private route: ActivatedRoute, 
     private router:Router, 
     private juegoService: JuegosService, 
-    private jsonService: GuardaJuegosService) {}
+    private jsonService: GuardaJuegosService,
+    private authService: AuthService) {}
 
   ngOnInit(): void {
     
@@ -61,11 +63,11 @@ export class DetalleJuegosComponent implements OnInit {
 
    
   saveGame():void {
-
+    const currentUser = this.authService.getCurrentUser();
     const juegoAGuardar = {
       juegoId: this.gameDetails.id,
       name: this.gameDetails.name,
-      userId: 1,
+      userId: currentUser?.id,
       image_id: this.gameDetails.cover.image_id,
       rating: this.gameDetails.rating,
       plataforma: 'Ta pendiente agregar (Eleccion de usuario)',

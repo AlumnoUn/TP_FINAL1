@@ -200,6 +200,16 @@
       "image_id": "co7m2i",
       "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
       "precioId": 0
+    },
+    {
+      "id": "3d03",
+      "juegoId": 250616,
+      "name": "Helldivers 2",
+      "userId": "203e",
+      "image_id": "co741o",
+      "rating": 81.6893183256465,
+      "plataforma": "Ta pendiente agregar (Eleccion de usuario)",
+      "precioId": 0
     }
   ]
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, of, BehaviorSubject, tap } from 'rxjs';
 import { User } from '../../shared/interfaces/user.interface';
+import { Juegos } from '../../shared/interfaces/juego.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,13 @@ export class AuthService {
     this.activeUserSubject.next(undefined);
     return of(true);
   }
+
+  getCurrentUser() {
+    return this.activeUserSubject.value;
+  }
+
+  getUserById(id: number) {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
+  }
+
 }
