@@ -9,6 +9,11 @@
       "id": "203e",
       "username": "Rodri",
       "password": "123"
+    },
+    {
+      "id": "9cc5",
+      "username": "More",
+      "password": "147"
     }
   ],
   "games": [
@@ -186,6 +191,61 @@
       "plataforma": "Sega Mega Drive/Genesis",
       "precio": 45,
       "estado": "Suelto"
+    },
+    {
+      "id": "af1e",
+      "juegoId": 81085,
+      "name": "Dark Souls: Remastered",
+      "userId": "9cc5",
+      "image_id": "co2uro",
+      "rating": 87.22040299869363,
+      "plataforma": "PlayStation 4",
+      "precio": 20,
+      "estado": "CIB"
+    },
+    {
+      "id": "3d2f",
+      "juegoId": 250616,
+      "name": "Helldivers 2",
+      "userId": "1180",
+      "image_id": "co741o",
+      "rating": 81.6893183256465,
+      "plataforma": "PC (Microsoft Windows)",
+      "precio": 30,
+      "estado": "Suelto"
+    },
+    {
+      "id": "9f08",
+      "juegoId": 103221,
+      "name": "Tetris Effect",
+      "userId": "1180",
+      "image_id": "co2kfy",
+      "rating": 87.32431879471676,
+      "plataforma": "SteamVR",
+      "precio": 20,
+      "estado": "Suelto"
+    },
+    {
+      "id": "2e1f",
+      "juegoId": 1219,
+      "name": "Kingdom Hearts",
+      "userId": "203e",
+      "image_id": "co30zf",
+      "rating": 82.99740248145179,
+      "plataforma": "PlayStation 2",
+      "precio": 22,
+      "estado": "En Caja"
+    },
+    {
+      "id": "c9bb",
+      "juegoId": 1223,
+      "name": "Kingdom Hearts 358/2 Days",
+      "userId": "203e",
+      "image_id": "co31qj",
+      "rating": 73.36027056419789,
+      "plataforma": "Nintendo DS",
+      "precio": 18,
+      "estado": "CIB"
     }
   ]
 }
