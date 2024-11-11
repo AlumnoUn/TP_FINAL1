@@ -1,0 +1,191 @@
+{
+  "users": [
+    {
+      "id": "1180",
+      "username": "Alan",
+      "password": "123"
+    },
+    {
+      "id": "203e",
+      "username": "Rodri",
+      "password": "123"
+    }
+  ],
+  "games": [
+    {
+      "id": "af25",
+      "juegoId": 2566,
+      "name": "Dragon Ball Z: Budokai 3",
+      "userId": "203e",
+      "image_id": "co6dfo",
+      "rating": 79.81637816146599,
+      "plataforma": "PlayStation 2",
+      "precio": 25.99,
+      "estado": "CIB"
+    },
+    {
+      "id": "e739",
+      "juegoId": 66405,
+      "name": "Dragon Ball: Dragon Daihikyou",
+      "userId": "5481",
+      "image_id": "co3lgf",
+      "plataforma": "Epoch Super Cassette Vision",
+      "precio": 15,
+      "estado": "En Caja"
+    },
+    {
+      "id": "2c1e",
+      "juegoId": 2670,
+      "name": "Guitar Hero II",
+      "userId": "5481",
+      "image_id": "co1we2",
+      "rating": 82.23539551545554,
+      "plataforma": "PlayStation 2",
+      "precio": 12.5,
+      "estado": "CIB"
+    },
+    {
+      "id": "3cb0",
+      "juegoId": 8247,
+      "name": "Marvel vs. Capcom 2: New Age of Heroes",
+      "userId": "203e",
+      "image_id": "co870e",
+      "rating": 85.50590660567813,
+      "plataforma": "Dreamcast",
+      "precio": 55,
+      "estado": "CIB"
+    },
+    {
+      "id": "e79c",
+      "juegoId": 551,
+      "name": "God of War II",
+      "userId": "203e",
+      "image_id": "co3dik",
+      "rating": 85.72363336029517,
+      "plataforma": "PlayStation 2",
+      "precio": 15,
+      "estado": "CIB"
+    },
+    {
+      "id": "6945",
+      "juegoId": 549,
+      "name": "God of War",
+      "userId": "203e",
+      "image_id": "co3ddc",
+      "rating": 83.9241831294798,
+      "plataforma": "PlayStation 2",
+      "precio": 20,
+      "estado": "CIB"
+    },
+    {
+      "id": "0fda",
+      "juegoId": 1074,
+      "name": "Super Mario 64",
+      "userId": "203e",
+      "image_id": "co721v",
+      "rating": 88.99669848939077,
+      "plataforma": "Nintendo 64",
+      "precio": 3,
+      "estado": "CIB"
+    },
+    {
+      "id": "2588",
+      "juegoId": 2327,
+      "name": "Mario Party",
+      "userId": "203e",
+      "image_id": "co22qr",
+      "rating": 81.40093102905779,
+      "plataforma": "Nintendo 64",
+      "precio": 25.99,
+      "estado": "Suelto"
+    },
+    {
+      "id": "5ecf",
+      "juegoId": 1030,
+      "name": "The Legend of Zelda: Majora's Mask",
+      "userId": "203e",
+      "image_id": "co3pah",
+      "rating": 86.8211354241764,
+      "plataforma": "Nintendo 64",
+      "precio": 3,
+      "estado": "En Caja"
+    },
+    {
+      "id": "512b",
+      "juegoId": 1004,
+      "name": "The Matrix: Path of Neo",
+      "userId": "203e",
+      "image_id": "co1p2r",
+      "rating": 66.88089620896386,
+      "plataforma": "PlayStation 2",
+      "precio": 5,
+      "estado": "CIB"
+    },
+    {
+      "id": "cdfd",
+      "juegoId": 78497,
+      "name": "Catherine: Full Body",
+      "userId": "203e",
+      "image_id": "co2e3g",
+      "rating": 78.01414251133869,
+      "plataforma": "PlayStation 4",
+      "precio": 15.99,
+      "estado": "CIB"
+    },
+    {
+      "id": "b77b",
+      "juegoId": 1877,
+      "name": "Cyberpunk 2077",
+      "userId": "203e",
+      "image_id": "co7497",
+      "rating": 81.44275197759123,
+      "plataforma": "PlayStation 4",
+      "precio": 4,
+      "estado": "CIB"
+    },
+    {
+      "id": "2995",
+      "juegoId": 26758,
+      "name": "Super Mario Odyssey",
+      "userId": "203e",
+      "image_id": "co1mxf",
+      "rating": 89.37020772109001,
+      "plataforma": "Nintendo Switch",
+      "precio": 50,
+      "estado": "CIB"
+    },
+    {
+      "id": "99ad",
+      "juegoId": 132181,
+      "name": "Resident Evil 4",
+      "userId": "203e",
+      "image_id": "co6bo0",
+      "rating": 90.92060800158126,
+      "plataforma": "PC (Microsoft Windows)",
+      "precio": 60,
+      "estado": "Suelto"
+    },
+    {
+      "id": "73c8",
+      "juegoId": 2671,
+      "name": "Guitar Hero III: Legends of Rock",
+      "userId": "203e",
+      "image_id": "co1wqm",
+      "rating": 84.10359404508293,
+      "plataforma": "Wii",
+      "precio": 7,
+      "estado": "En Caja"
+    },
+    {
+      "id": "e146",
+      "juegoId": 9475,
+      "name": "Sonic & Knuckles",
+      "userId": "203e",
+      "image_id": "co1ups",
+      "rating": 80.33123325689898,
+      "plataforma": "Sega Mega Drive/Genesis",
+      "precio": 45,
+      "estado": "Suelto"
+    }
+  ]
+}
