@@ -255,6 +255,37 @@ font-size: 1.8em;
   margin: 0 10px;
 }
 
+.button-pagination {
+  background-color: #007bff; 
+  color: white; 
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 5px; 
+}
+
+.button-pagination:hover {
+  background-color: #0056b3; 
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin-top: 20px; 
+}
+
+.page-number {
+  font-size: 18px;
+  margin: 0 10px; /
+  font-weight: bold;
+  color: white; 
+}
+
+
 .metacriticScore{
   padding: 4px 8px;
   border-radius: 4px;
@@ -426,6 +457,15 @@ button {
   background-color: #2563eb;
 }
 
+.search-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+
 
 
 </style>
@@ -433,12 +473,7 @@ button {
 
 <div class="background-container">
 
-  <div class="search-container" [ngClass]="{'fade-in': !cargando}" *ngIf="!mostrarDetalles">
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar juegos por nombre" (keyup.enter)="searchGamesbyName()"/>
-    <button (click)="searchGamesbyName()">Buscar</button>
-    <button (click)="resetSearch()">Reiniciar</button>
-  </div>
-
+  <h1 class="search-title">Mi Colección de Juegos</h1>
 
 <div *ngIf="cargando" class="overlay">
   <div *ngIf="cargando" class="icono-carga" [ngClass]="{'fade-in': cargando, 'fade-out': !cargando}">
@@ -447,6 +482,12 @@ button {
 </div>
 
 <div *ngIf="games[0] != null; else sinJuegos">
+
+  <div class="search-container" [ngClass]="{'fade-in': !cargando}" *ngIf="!mostrarDetalles">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar juegos por nombre" (keyup.enter)="searchGamesbyName()"/>
+    <button (click)="searchGamesbyName()">Buscar</button>
+    <button (click)="resetSearch()">Reiniciar</button>
+  </div>
 
 <div *ngIf="!mostrarDetalles" class="games-container" >
     <div class="game-list" *ngIf="!cargando && games.length > 0" [ngClass]="{'fade-in': !cargando, 'fade-out': cargando}">
@@ -480,10 +521,10 @@ button {
   </div>
 
 
-  <div *ngIf="!mostrarDetalles" class="pagination-controls">
-    <button (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
-    <span>Página {{ paginaActual }}</span>
-    <button (click)="siguientePagina()" [disabled]="">Siguiente</button>
+  <div class="pagination-container" *ngIf="!mostrarDetalles" class="pagination-controls">
+    <button class="button-pagination" (click)="anteriorPagina()" [disabled]="paginaActual === 1">Anterior</button>
+    <span class = "page-number">Página {{ paginaActual }}</span>
+    <button class="button-pagination" (click)="siguientePagina()" [disabled]="">Siguiente</button>
   </div>
 </div>
 <div class="top-spacer"></div>
@@ -566,7 +607,7 @@ button {
 
 
   <ng-template #sinJuegos>
-    <div class="sinJuegos">
-    <h2>No tenés juegos en tu colección. ¡Empezá a cargarlos!</h2>
+    <div class="sinJuegos" *ngIf="!cargando">
+    <h2 class="search-title">No tenés juegos en tu colección. ¡Empezá a cargarlos!</h2>
     </div>
   </ng-template>
