@@ -20,22 +20,54 @@ export class LoginPageComponent {
     password: ['', [Validators.required]]
   })
 
+  errorMessage: string ='';
+  cargando: boolean = false;
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
 
   onLogin() {
-    if (this.form.invalid) return;
+    const username = this.form.get('username')?.value ?? '';
+    const password = this.form.get('password')?.value ?? '';
 
-    const user = this.form.getRawValue() as User;
+    if (!username && !password) {
+      this.errorMessage = 'No puede dejar los campos en blanco.';
+      return;
+    }
+    
+    if (!username) {
+      this.errorMessage = 'El nombre de usuario es obligatorio.';
+      return;
+    }
+    
+    if (!password) {
+      this.errorMessage = 'La contraseña es obligatoria.';
+      return;
+    }
 
-    this.authService.login(user).subscribe({
-      next: (loggedin) => {
-        if (loggedin) {
+    this.cargando = true;
+    this.errorMessage = '';
+
+    this.authService.login({ username, password }).subscribe({
+      next: (result) => {
+        this.cargando = false;
+        if (result.success) {
           this.router.navigate(['/juegosGuardados']);
-        } 
+          this.errorMessage = ''; // Limpiar errores
+        } else {
+            this.errorMessage = result.message;
+        }
+      },
+      error: () => {
+        this.cargando = false;
+        this.errorMessage = 'Error inesperado. Intente nuevamente.';
       }
-    })
+    });
   }
 }
+
+
+
+
