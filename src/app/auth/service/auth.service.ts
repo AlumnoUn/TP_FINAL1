@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, of, BehaviorSubject, tap, switchMap } from 'rxjs';
+import { catchError, map, of, BehaviorSubject, tap, switchMap, Observable } from 'rxjs';
 import { User } from '../../shared/interfaces/user.interface';
 
 
@@ -66,19 +66,28 @@ export class AuthService {
     );
   }
 
-  login(user: User) {
+  login(user: User): Observable<{ success: boolean, message: string }> {
     return this.http.get<User[]>(`${this.baseUrl}?username=${user.username}`).pipe(
-      map(([u]) => {
-        if (u && u.password === user.password) {
-          ///Para mantener la sesion iniciada en otras pestañas
-          localStorage.setItem('activeUser', JSON.stringify(u));
+      map(users => {
+        const foundUser = users[0];
+  
 
-          this.activeUserSubject.next(u);
-          return true
+        if (!foundUser) {
+          return { success: false, message: '¡El Usuario no existe y/o es incorrecto!' };
         }
-        return false;
+  
+
+        if (foundUser.password !== user.password) {
+          return { success: false, message: 'La contraseña es incorrecta' };
+        }
+  
+
+        localStorage.setItem('activeUser', JSON.stringify(foundUser)); 
+        this.activeUserSubject.next(foundUser);
+  
+        return { success: true, message: '¡Inicio de sesion exitoso!' };
       }),
-      catchError(() => of(false))
+      catchError(() => of({ success: false, message: 'Error desconocido (¿Está conectado a la base de datos?)' }))
     );
   }
 
