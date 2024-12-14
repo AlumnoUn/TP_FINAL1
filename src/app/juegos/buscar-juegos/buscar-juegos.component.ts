@@ -7,7 +7,7 @@ import { forkJoin, map} from 'rxjs';
 import { ActivatedRoute, RouterModule, Routes} from '@angular/router';
 import { Router } from '@angular/router';
 import { JuegosService } from '../acceso-juegos/juegos.service';
-import juegosRoute from '../ruta-juegos/juegos.route';
+
 
 
 @Component({
@@ -34,30 +34,7 @@ export class BuscarJuegosComponent {
     this.errorMessage = '';
     this.cargando = true;
 
-    const headers = new HttpHeaders({
-      'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-      'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
-      "Accept": "application/json"
-      });
-
-    const buscarJuegos = this.http.post<any[]>(this.gamesApi, 
-      `fields name, 
-      cover.image_id, 
-      summary, 
-      rating, 
-      platforms.name, 
-      platforms.abbreviation, 
-      id, 
-      genres.name, 
-      release_dates.human, 
-      screenshots.image_id,
-      screenshots.url,
-      involved_companies.company.name,
-      videos.video_id;
-      search "${this.searchTerm}"; where version_parent = null;`, {headers})
-
-
-    buscarJuegos.subscribe((gamesResponse: any) => {
+     this.juegoService.buscarJuegos(this.searchTerm).subscribe((gamesResponse: any) => {
           this.games = gamesResponse;
           this.cargando = false;
           console.log(gamesResponse);

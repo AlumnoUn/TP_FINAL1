@@ -39,6 +39,7 @@ button {
 }
 
 .game-card {
+  position: relative;
   border: 3px solid #ffffff; 
   border-radius: 8px;
   padding: 10px; 
@@ -54,7 +55,41 @@ button {
   justify-content: center; 
   align-items: center;
   overflow: hidden; 
+  
+}
+.menu-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #ffffff;
+}
 
+.dropdown-menu {
+  position: absolute;
+  top: 35px; /* Justo debajo de los tres puntos */
+  right: 10px;
+  background-color: #35075a;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 10;
+}
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.dropdown-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .game-card img {
@@ -116,7 +151,7 @@ button {
 }
 
 .rating-unknown {
-  background-color: #cccccc; /* Color para cuando no hay rating */
+  background-color: #cccccc; 
   color: #000000;
 }
 
@@ -128,11 +163,11 @@ button {
 }
 
 .icono-carga {
-  position: fixed; /* Para mantener el icono centrado */
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  z-index: 1000;
   text-align: center;
 }
 
@@ -142,26 +177,33 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  z-index: 999; /* Debajo del contenedor de carga */
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 999; 
 }
 
 .detalleContainer{
+  position: relative;
+  overflow-y: auto;
+  max-height: 79vh;
+  margin-top: 30px;
   display: flex;
-  gap: 20px; /* Espacio entre la portada y el contenido */
+  gap: 20px; 
   padding: 20px;
-  background-color: #3c0073; /* Color de fondo */
+  padding-bottom: 90px;
+  margin-bottom: 20px;
+  background-color: #3c0073;
   border-radius: 10px;
-  max-width: 1200px; /* Ancho máximo para widescreen */
-  margin: 0 auto; /* Centra el contenedor */
+  max-width: 1200px; 
+  margin: 0 auto;
+  z-index: 1;
 }
 
 .cover-container{
-  display: flex;
+  position: sticky;
+  top: 30%; 
+  align-self: flex-start;
   border-right: 2px solid #fff; 
   padding-right: 20px;
-  justify-content: center;
-  align-items: center;
 }
 
 .coverimagen{
@@ -187,7 +229,7 @@ font-size: 1.8em;
 }
 
 .detalleContainer p {
-  font-size: 0.7em;
+  font-size: 1.0em;
   color: #ffffff;
   line-height: 1.5;
   margin-bottom: 20px;
@@ -245,7 +287,7 @@ font-size: 1.8em;
 }
 
 .rating-unknown {
-  background-color: #cccccc; /* Color para cuando no hay rating */
+  background-color: #cccccc; 
   color: #000000;
 }
 
@@ -261,7 +303,7 @@ margin-bottom: 5px;
 }
 
 button {
-  background-color: #e6e6e6; /* Puedes ajustar el color si quieres */
+  background-color: #e6e6e6;
   color: black;
   padding: 10px 20px;
   border: none;
@@ -325,24 +367,63 @@ button {
   text-align: center;      
 }
 
-.sinJuegos h1 {
+.sinJuegos h2 {
   margin: 0; 
 }
 
-.estado-CIB {
-  color: rgb(0, 129, 22);  /* El color que desees */
+.bottom-spacer {
+  height: 15px; /* Ajusta este valor según el espacio que necesites */
+  flex-shrink: 0; /* Evita que el espaciador cambie de tamaño */
 }
 
-.estado-enCaja {
-  color: rgb(201, 236, 0);  /* Otro color si es necesario */
+.top-spacer {
+  height: 15px; /* Ajusta este valor según el espacio que necesites */
+  flex-shrink: 0; /* Evita que el espaciador cambie de tamaño */
 }
 
-.estado-sellado {
-  color: rgb(1, 255, 35);  /* El color que desees */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  gap: 8px;
+  background-color: #1c1c2b;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: 400px; 
+  margin: 0 auto; 
+  margin-top: 1vh; 
 }
 
-.estado-suelto {
-  color: rgb(201, 0, 0);  /* Otro color si es necesario */
+.search-container input[type="text"] {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  color: #ffffff;
+  background-color: #333;
+  font-size: 14px;
+}
+
+.search-container input[type="text"]::placeholder {
+  color: #a9a9a9;
+}
+
+.search-container button {
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+  background-color: #2563eb;
 }
 
 
@@ -351,6 +432,13 @@ button {
 
 
 <div class="background-container">
+
+  <div class="search-container" [ngClass]="{'fade-in': !cargando}" *ngIf="!mostrarDetalles">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar juegos por nombre" (keyup.enter)="searchGamesbyName()"/>
+    <button (click)="searchGamesbyName()">Buscar</button>
+    <button (click)="resetSearch()">Reiniciar</button>
+  </div>
+
 
 <div *ngIf="cargando" class="overlay">
   <div *ngIf="cargando" class="icono-carga" [ngClass]="{'fade-in': cargando, 'fade-out': !cargando}">
@@ -363,6 +451,14 @@ button {
 <div *ngIf="!mostrarDetalles" class="games-container" >
     <div class="game-list" *ngIf="!cargando && games.length > 0" [ngClass]="{'fade-in': !cargando, 'fade-out': cargando}">
         <div *ngFor="let game of games" class="game-card"  (click)="buscarJuegosColeccionEnApi(game.juegoId)" style="cursor: pointer;">
+          <div class="menu-icon" (click)="toggleMenu($event, game.id)">
+            ⋮
+          </div>
+          <div class="dropdown-menu" *ngIf="menuAbiertoId === game.id">
+            <button (click)="removeFromCollection($event, game.id)">Quitar de tu colección</button>
+          </div>
+
+          
           <img *ngIf="game.image_id" [src]="'//images.igdb.com/igdb/image/upload/t_cover_med/' + game.image_id + '.jpg'" alt="{{ game.name }}" />
           <h5>{{ game.name }}</h5>
           <span *ngIf="game.plataforma" class="consola">
@@ -390,6 +486,7 @@ button {
     <button (click)="siguientePagina()" [disabled]="">Siguiente</button>
   </div>
 </div>
+<div class="top-spacer"></div>
   <div *ngIf="mostrarDetalles && gameDetails" [ngClass]="{'fade-in': !cargando, 'fade-out': cargando}" class="detalleContainer">
     <div class="cover-container">
       <img class="coverimagen" *ngIf="gameDetails.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_big/' + gameDetails.cover.image_id + '.jpg'" alt="{{ gameDetails.name }}" />
@@ -420,7 +517,7 @@ button {
           </span>
           <hr>
   
-          <strong>Desarrolladores</strong>
+          <strong>Desarrolladores:</strong>
           <span *ngFor="let compania of gameDetails.involved_companies; let last = last">
               {{ compania.company.name }}<span *ngIf="!last">, </span>     
           </span>
@@ -453,6 +550,7 @@ button {
       <div>
         <button (click)="volverALaLista()">Volver a la lista</button>
       </div>
+      <div class="bottom-spacer"></div>
       
   </div>
 

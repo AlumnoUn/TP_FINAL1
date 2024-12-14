@@ -27,9 +27,14 @@
 
 .detalleContainer{
   position: relative;
+  overflow-y: auto;
+  max-height: 79vh;
+  margin-top: 30px;
   display: flex;
   gap: 20px; 
   padding: 20px;
+  padding-bottom: 90px;
+  margin-bottom: 20px;
   background-color: #3c0073; /* Color de fondo */
   border-radius: 10px;
   max-width: 1200px; 
@@ -37,12 +42,13 @@
   z-index: 1; /* Asegura que quede por encima del fondo */
 }
 
+
 .cover-container{
-  display: flex;
+  position: sticky;
+  top: 90px; 
+  align-self: flex-start;
   border-right: 2px solid #fff; 
   padding-right: 20px;
-  justify-content: center;
-  align-items: center;
 }
 
 .coverimagen{
@@ -69,7 +75,7 @@ font-size: 1.8em;
 }
 
 .detalleContainer p {
-  font-size: 0.7em;
+  font-size: 1.0em;
   color: #ffffff;
   line-height: 1.5;
   margin-bottom: 20px;
@@ -177,13 +183,22 @@ button {
   transition: all 0.5s ease-in-out;
 }
 
+.bottom-spacer {
+  height: 10px; /* Ajusta este valor según el espacio que necesites */
+  flex-shrink: 0; /* Evita que el espaciador cambie de tamaño */
+}
+
+.top-spacer {
+  height: 15px; /* Ajusta este valor según el espacio que necesites */
+  flex-shrink: 0; /* Evita que el espaciador cambie de tamaño */
+}
 
 
 
 </style>
 <div class="background-container" [ngStyle]="{ 'background-image': 'url(//images.igdb.com/igdb/image/upload/t_screenshot_big/' + gameDetails.screenshots[0].image_id + '.jpg)' }">
 </div>
-
+<div class="top-spacer"></div>
 <div class="detalleContainer" *ngIf="gameDetails" [ngClass]="{'fade-in': gameDetails}">
   <div class="cover-container">
     <img class="coverimagen" *ngIf="gameDetails.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_big/' + gameDetails.cover.image_id + '.jpg'" alt="{{ gameDetails.name }}" />
@@ -267,6 +282,7 @@ button {
     </div>
         <button (click)="saveGame()">Guardar juego</button>        
     </div>
+    <div class="bottom-spacer"></div>
     
 </div>
 
@@ -276,5 +292,6 @@ button {
 
 <ng-template #guestNotification>
   <strong>¡Iniciá sesión para agregarlo a tu biblioteca!</strong>
+  <div class="bottom-spacer"></div>
 </ng-template>
 </div>

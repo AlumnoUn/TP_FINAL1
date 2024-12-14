@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, of, BehaviorSubject, tap, switchMap } from 'rxjs';
 import { User } from '../../shared/interfaces/user.interface';
-import { Juegos } from '../../shared/interfaces/juego.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,24 @@ export class AuthService {
   private baseUrl = 'http://localhost:3000/users'
 
   private activeUserSubject = new BehaviorSubject<User | undefined>(undefined);
+  activeUser$ = this.activeUserSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    const storedUser = localStorage.getItem('activeUser');
+    if(storedUser){
+      this.activeUserSubject.next(JSON.parse(storedUser));
+    } else {
+      this.activeUserSubject.next(undefined);
+    }
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'activeUser') {
+        const newUser = event.newValue ? JSON.parse(event.newValue) : undefined;
+        this.activeUserSubject.next(newUser); // Actualiza el estado del usuario en esta pestaña
+      }
+    });
+  }
+
+  
 
   auth() {
     return this.activeUserSubject.asObservable();
@@ -54,6 +70,9 @@ export class AuthService {
     return this.http.get<User[]>(`${this.baseUrl}?username=${user.username}`).pipe(
       map(([u]) => {
         if (u && u.password === user.password) {
+          ///Para mantener la sesion iniciada en otras pestañas
+          localStorage.setItem('activeUser', JSON.stringify(u));
+
           this.activeUserSubject.next(u);
           return true
         }
@@ -64,6 +83,7 @@ export class AuthService {
   }
 
   logout() {
+    localStorage.removeItem('activeUser'); // Quita la sesion en general
     this.activeUserSubject.next(undefined);
     return of(true);
   }

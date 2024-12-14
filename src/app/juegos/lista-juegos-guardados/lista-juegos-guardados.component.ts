@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { GuardaJuegosService } from '../../service/guarda-juegos.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -7,11 +7,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DetalleJuegosComponent } from '../detalle-juegos/detalle-juegos.component';
 import { AuthService } from '../../auth/service/auth.service';
 import { BuscarJuegosComponent } from '../buscar-juegos/buscar-juegos.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-juegos-guardados',
   standalone: true,
-  imports: [CommonModule, DetalleJuegosComponent],
+  imports: [CommonModule, DetalleJuegosComponent, FormsModule],
   templateUrl: './lista-juegos-guardados.component.html',
   styles: ``
 })
@@ -29,11 +30,9 @@ export class ListaJuegosGuardadosComponent {
   urlVideoYoutube: string = 'https://www.youtube.com/watch?v=';
 
   indiceImagenActual: number = 0;
-
-  mostrarIcono: boolean = true;
-  mostrarTexto: boolean = false;
-  textoTooltip: string = 'Clickeá acá para buscar juegos y agregarlos a tu colección!';
-
+  searchTerm:string = '';
+  isMenuOpen = false;
+  menuAbiertoId: number | null = null;
 
   constructor(private guardaJuegos: GuardaJuegosService, private router:Router, private juegosService: JuegosService, private http: HttpClient, private authService: AuthService){}
 
@@ -42,11 +41,12 @@ export class ListaJuegosGuardadosComponent {
   }
 
 
+  resetSearch(): void {
+    this.searchTerm = '';  
+    this.cargaJuegos(); 
+  }
 
-  /// Carga Juegos muestra la carga inicial del JSON, pero al toque carga los datos de la API. Apenas tengamos lo de plataformas, estaria bueno que solo muestre la plataforma que el usuario tiene el juego.
-  cargaJuegos(): void {
-    this.cargando = true;
-    this.errorMessage = '';
+  searchGamesbyName():void {
     const currentUser = this.authService.getCurrentUser();
     const userId = currentUser?.id;
 
@@ -55,8 +55,50 @@ export class ListaJuegosGuardadosComponent {
       this.errorMessage = 'No se ha encontrado el ID de usuario. Por favor, inicie sesión nuevamente.';
       return;
     }
-
+    console.log("Buscando: ", this.searchTerm);
     const start = (this.paginaActual - 1) * this.juegosPorPagina;
+
+  if (this.searchTerm.trim() === '') {
+    this.cargando = false;
+    this.errorMessage = 'Por favor, ingresa un término de búsqueda.';
+    return;
+  }
+    this.guardaJuegos.getGamesBySearch(userId, this.searchTerm)
+    .subscribe((response: any[]) => {
+      this.cargando = false;   
+      if (response.length > 0)
+      {    
+        this.games = response.slice(0, this.juegosPorPagina).sort((a, b) => a.created_at - b.created_at);
+        this.continua = response.length > this.juegosPorPagina;
+        console.log('Juegos en esta página:', this.games);
+      }
+      else{
+        this.cargando = false;
+        this.errorMessage = 'No existen estos juegos en tu colección.';
+        console.log(this.errorMessage);
+      } 
+     },
+        (error) => {
+          this.cargando = false;
+          console.error('Error al cargar los juegos desde el JSON Server.', error);
+          }
+        );
+    }
+
+  /// Carga Juegos muestra la carga inicial del JSON, pero al toque carga los datos de la API. Apenas tengamos lo de plataformas, estaria bueno que solo muestre la plataforma que el usuario tiene el juego.
+  cargaJuegos(): void {
+    this.cargando = true;
+    this.errorMessage = '';
+    const currentUser = this.authService.getCurrentUser();
+    const userId = currentUser?.id;
+    const start = (this.paginaActual - 1) * this.juegosPorPagina;
+
+    if (!userId) {
+      this.cargando = false;
+      this.errorMessage = 'No se ha encontrado el ID de usuario. Por favor, inicie sesión nuevamente.';
+      return;
+    }
+
     this.guardaJuegos.getGames(userId, start, this.juegosPorPagina + 1).subscribe(
       (response: any[]) => {    
         this.cargando = false;   
@@ -84,30 +126,9 @@ buscarJuegosColeccionEnApi(id: number): void{
   this.gameDetails = [];
   this.indiceImagenActual = 0;
   this.cargando = true;
-  const headers = new HttpHeaders({
-    'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-    'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
-    "Accept": "application/json"
-    });
+ 
 
-    
-    const body = `
-      fields name, 
-      cover.image_id, 
-      summary, 
-      rating, 
-      platforms.name, 
-      platforms.abbreviation, 
-      id, 
-      genres.name, 
-      release_dates.human, 
-      screenshots.image_id,
-      screenshots.url,
-      involved_companies.company.name,
-      videos.video_id;
-      where id = (${id});`; 
-
-      this.http.post<any[]>(this.gamesApi, body, { headers }).subscribe(
+      this.juegosService.buscarJuegoEnJson(id).subscribe(
         (gamesResponse) => {
           this.gameDetails = gamesResponse[0];
           this.mostrarDetalles = true;
@@ -163,6 +184,38 @@ volverALaLista() {
 
   anteriorImagen(imagen: any[]){
       this.indiceImagenActual = (this.indiceImagenActual - 1 + imagen.length) % imagen.length;
+  }
+
+  toggleMenu(event: Event, gameId: number) {
+    event.stopPropagation();
+    this.menuAbiertoId = this.menuAbiertoId === gameId ? null : gameId;
+  }
+
+
+  removeFromCollection(event: MouseEvent, id: string) {
+    this.cargando = true;
+    event.stopPropagation();
+    const currentUser = this.authService.getCurrentUser();
+    const userId = currentUser?.id;
+    if (!userId) {
+      this.cargando = false;
+      this.errorMessage = 'No se ha encontrado el ID de usuario. Por favor, inicie sesión nuevamente.';
+      return;
+    }
+    this.guardaJuegos.deleteGameFromCollection(userId, id).subscribe(
+      () => {
+        console.log(`Juego con ID ${id} eliminado de la colección`);
+        this.cargando = false;
+        this.isMenuOpen = false;
+        // Actualiza la lista de juegos después de la eliminación si es necesario
+        this.cargaJuegos();
+      },
+      error => console.error('Error al eliminar el juego:', error)
+    );
+  }
+  
+  closeMenu() {
+    this.menuAbiertoId = null;
   }
 
 
