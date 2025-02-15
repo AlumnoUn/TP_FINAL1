@@ -14,6 +14,16 @@
       "id": "9cc5",
       "username": "More",
       "password": "147"
+    },
+    {
+      "username": "rodri",
+      "password": "more",
+      "id": "S066LOt"
+    },
+    {
+      "username": "Jorge",
+      "password": "123",
+      "id": "8A_MzmW"
     }
   ],
   "games": [
@@ -26,27 +36,6 @@
       "rating": 79.81637816146599,
       "plataforma": "PlayStation 2",
       "precio": 25.99,
-      "estado": "CIB"
-    },
-    {
-      "id": "e739",
-      "juegoId": 66405,
-      "name": "Dragon Ball: Dragon Daihikyou",
-      "userId": "5481",
-      "image_id": "co3lgf",
-      "plataforma": "Epoch Super Cassette Vision",
-      "precio": 15,
-      "estado": "En Caja"
-    },
-    {
-      "id": "2c1e",
-      "juegoId": 2670,
-      "name": "Guitar Hero II",
-      "userId": "5481",
-      "image_id": "co1we2",
-      "rating": 82.23539551545554,
-      "plataforma": "PlayStation 2",
-      "precio": 12.5,
       "estado": "CIB"
     },
     {
@@ -246,6 +235,346 @@
       "plataforma": "Nintendo DS",
       "precio": 18,
       "estado": "CIB"
+    },
+    {
+      "juegoId": 2191,
+      "name": "Super Paper Mario",
+      "userId": "S066LOt",
+      "image_id": "co21rp",
+      "rating": 78.42582773415742,
+      "plataforma": "Wii",
+      "precio": 20,
+      "estado": "En Caja",
+      "id": "IwinlRI"
+    },
+    {
+      "juegoId": 133942,
+      "name": "Sonic Unleashed",
+      "userId": "S066LOt",
+      "image_id": "co2v6n",
+      "rating": 29.61060818838364,
+      "plataforma": "Wii",
+      "precio": 15,
+      "estado": "En Caja",
+      "id": "YA1BN-s"
+    },
+    {
+      "juegoId": 21533,
+      "name": "Resident Evil 4: Wii Edition",
+      "userId": "S066LOt",
+      "image_id": "co20ch",
+      "rating": 84.56276903663948,
+      "plataforma": "Wii",
+      "precio": 10,
+      "estado": "CIB",
+      "id": "LE_t-0S"
+    },
+    {
+      "juegoId": 134014,
+      "name": "The Legend of Zelda: Twilight Princess",
+      "userId": "S066LOt",
+      "image_id": "co3w1h",
+      "rating": 78.50823755676923,
+      "plataforma": "Wii",
+      "precio": 5,
+      "estado": "CIB",
+      "id": "9MirYC8"
+    },
+    {
+      "juegoId": 7346,
+      "name": "The Legend of Zelda: Breath of the Wild",
+      "userId": "S066LOt",
+      "image_id": "co3p2d",
+      "rating": 92.74015471677424,
+      "plataforma": "Wii U",
+      "precio": 60,
+      "estado": "CIB",
+      "id": "smhOqDs"
+    },
+    {
+      "juegoId": 303811,
+      "name": "Astro Bot",
+      "userId": "S066LOt",
+      "image_id": "co8hl0",
+      "rating": 92.11163642227034,
+      "plataforma": "PlayStation 5",
+      "precio": 0,
+      "estado": "CIB",
+      "id": "dmttBvU"
+    },
+    {
+      "juegoId": 359,
+      "name": "Final Fantasy XV",
+      "userId": "S066LOt",
+      "image_id": "co6nz1",
+      "rating": 76.35661840694561,
+      "plataforma": "PlayStation 4",
+      "precio": 22,
+      "estado": "CIB",
+      "id": "XS-fYFu"
+    },
+    {
+      "juegoId": 109458,
+      "name": "Katamari Damacy Reroll",
+      "userId": "S066LOt",
+      "image_id": "co25sm",
+      "rating": 83.77914739217812,
+      "plataforma": "PlayStation 4",
+      "precio": 18,
+      "estado": "CIB",
+      "id": "2LXBMqk"
+    },
+    {
+      "juegoId": 134584,
+      "name": "Returnal",
+      "userId": "S066LOt",
+      "image_id": "co3wc1",
+      "rating": 82.531707146723,
+      "plataforma": "PlayStation 5",
+      "precio": 30,
+      "estado": "CIB",
+      "id": "WQ6Puuc"
+    },
+    {
+      "juegoId": 284716,
+      "name": "Sonic X Shadow Generations",
+      "userId": "S066LOt",
+      "image_id": "co8byo",
+      "rating": 80.04898791440282,
+      "plataforma": "PlayStation 5",
+      "precio": 50,
+      "estado": "CIB",
+      "id": "ZKms3Tz"
+    },
+    {
+      "juegoId": 2566,
+      "name": "Dragon Ball Z: Budokai 3",
+      "userId": "S066LOt",
+      "image_id": "co6dfo",
+      "rating": 79.81969343714565,
+      "plataforma": "PlayStation 2",
+      "precio": 25,
+      "estado": "CIB",
+      "id": "QJWWNsY"
+    },
+    {
+      "juegoId": 234834,
+      "name": "The Adventures of Batman & Robin",
+      "userId": "S066LOt",
+      "image_id": "co6378",
+      "rating": 82.23372246961127,
+      "plataforma": "Sega Mega Drive/Genesis",
+      "precio": 5,
+      "estado": "En Caja",
+      "id": "ToDKbPF"
+    },
+    {
+      "juegoId": 1721,
+      "name": "Mega Man 8",
+      "userId": "S066LOt",
+      "image_id": "co55c7",
+      "rating": 76.40827114910601,
+      "plataforma": "PlayStation",
+      "precio": 1,
+      "estado": "En Caja",
+      "id": "CRIjm7G"
+    },
+    {
+      "juegoId": 19562,
+      "name": "Resident Evil 7: Biohazard",
+      "userId": "203e",
+      "image_id": "co8uu1",
+      "rating": 84.03067954699588,
+      "plataforma": "PlayStation 4",
+      "precio": 18,
+      "estado": "CIB",
+      "id": "s1sMrZu"
+    },
+    {
+      "juegoId": 21063,
+      "name": "Sonic Forces",
+      "userId": "203e",
+      "image_id": "co1zr8",
+      "rating": 56.17473198748328,
+      "plataforma": "PlayStation 4",
+      "precio": 15,
+      "estado": "CIB",
+      "id": "N2JMcSu"
+    },
+    {
+      "juegoId": 77175,
+      "name": "Street Fighter 30th Anniversary Collection",
+      "userId": "203e",
+      "image_id": "co1nvd",
+      "rating": 75.61761367629111,
+      "plataforma": "PlayStation 4",
+      "precio": 20,
+      "estado": "CIB",
+      "id": "UbApZa9"
+    },
+    {
+      "juegoId": 1747,
+      "name": "Mega Man X7",
+      "userId": "203e",
+      "image_id": "co7otp",
+      "rating": 40.03858883463381,
+      "plataforma": "PlayStation 2",
+      "precio": 0,
+      "estado": "CIB",
+      "id": "vEV8VAe"
+    },
+    {
+      "juegoId": 109462,
+      "name": "Animal Crossing: New Horizons",
+      "userId": "203e",
+      "image_id": "co3wls",
+      "rating": 82.48981245402868,
+      "plataforma": "Nintendo Switch",
+      "precio": 62.99,
+      "estado": "CIB",
+      "id": "omgfnDl"
+    },
+    {
+      "juegoId": 128769,
+      "name": "Captain Tsubasa: Rise of New Champions",
+      "userId": "203e",
+      "image_id": "co235r",
+      "rating": 68.3117794919527,
+      "plataforma": "Nintendo Switch",
+      "precio": 23.5,
+      "estado": "CIB",
+      "id": "YgjWTbZ"
+    },
+    {
+      "juegoId": 85576,
+      "name": "Donkey Kong Country: Tropical Freeze",
+      "userId": "203e",
+      "image_id": "co7pmi",
+      "rating": 76.76062277604481,
+      "plataforma": "Nintendo Switch",
+      "precio": 50,
+      "estado": "CIB",
+      "id": "qn2bUJW"
+    },
+    {
+      "juegoId": 26764,
+      "name": "Mario Kart 8 Deluxe",
+      "userId": "203e",
+      "image_id": "co213p",
+      "rating": 84.56943220082535,
+      "plataforma": "Nintendo Switch",
+      "precio": 25,
+      "estado": "CIB",
+      "id": "8Kcs3rJ"
+    },
+    {
+      "juegoId": 11133,
+      "name": "Dark Souls III",
+      "userId": "203e",
+      "image_id": "co1vcf",
+      "rating": 87.0044470946708,
+      "plataforma": "PlayStation 4",
+      "precio": 20,
+      "estado": "CIB",
+      "id": "SB3zZvs"
+    },
+    {
+      "juegoId": 134584,
+      "name": "Returnal",
+      "userId": "203e",
+      "image_id": "co3wc1",
+      "rating": 82.531707146723,
+      "plataforma": "PlayStation 5",
+      "precio": 0,
+      "estado": "CIB",
+      "id": "Yl8vs9r"
+    }
+  ],
+  "wishlist": [
+    {
+      "juegoId": 114283,
+      "name": "Persona 5 Royal",
+      "userId": "S066LOt",
+      "image_id": "co1nic",
+      "rating": 95.21442877563922,
+      "id": 1
+    },
+    {
+      "juegoId": 2563,
+      "name": "Dragon Ball Z: Budokai",
+      "userId": "S066LOt",
+      "image_id": "co3ttg",
+      "rating": 66.53504202073883,
+      "id": 3
+    },
+    {
+      "juegoId": 204381,
+      "name": "The Plucky Squire",
+      "userId": "S066LOt",
+      "image_id": "co6z44",
+      "rating": 74.9322622652865,
+      "id": 4
+    },
+    {
+      "juegoId": 4407,
+      "name": "The Great Circus Mystery Starring Mickey & Minnie",
+      "userId": "S066LOt",
+      "image_id": "co63ox",
+      "rating": 72.21284078804034,
+      "id": 6
+    },
+    {
+      "juegoId": 306147,
+      "name": "Marvel vs. Capcom Fighting Collection: Arcade Classics",
+      "userId": "203e",
+      "image_id": "co8tax",
+      "id": 7
+    },
+    {
+      "juegoId": 222485,
+      "name": "Silent Hill 2",
+      "userId": "203e",
+      "image_id": "co5wkr",
+      "rating": 92.94402063626505,
+      "id": 8
+    },
+    {
+      "juegoId": 222341,
+      "name": "Silent Hill 2",
+      "userId": "203e",
+      "image_id": "co5l7s",
+      "rating": 91.31933623229688,
+      "id": 9
+    },
+    {
+      "juegoId": 250634,
+      "name": "Metal Gear Solid Delta: Snake Eater",
+      "userId": "203e",
+      "image_id": "co7lb7",
+      "id": 10
+    },
+    {
+      "juegoId": 31551,
+      "name": "Final Fantasy XVI",
+      "userId": "203e",
+      "image_id": "co5w3k",
+      "rating": 85.95438185956473,
+      "id": 11
+    },
+    {
+      "juegoId": 329132,
+      "name": "Ninja Gaiden II Black",
+      "userId": "203e",
+      "image_id": "co9b3s",
+      "id": 12
+    },
+    {
+      "juegoId": 259206,
+      "name": "Nickelodeon All-Star Brawl 2",
+      "userId": "203e",
+      "image_id": "co756t",
+      "rating": 79.71205224461437,
+      "id": 13
     }
   ]
 }
