@@ -12,12 +12,14 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-lista-juegos-guardados',
   standalone: true,
-  imports: [CommonModule, DetalleJuegosComponent, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './lista-juegos-guardados.component.html',
   styles: ``
 })
 export class ListaJuegosGuardadosComponent {
 
+
+  mostrandoWishlist: boolean = false;
   games: any[] = [] ;
   gameDetails: any = {};
   paginaActual: number = 1;
@@ -38,6 +40,11 @@ export class ListaJuegosGuardadosComponent {
 
   ngOnInit(): void {
     this.cargaJuegos();
+  }
+
+  rutaABuscarJuegos() {
+    // Aquí puedes ejecutar cualquier lógica adicional si es necesario
+    this.router.navigate(['/buscarJuegos']);
   }
 
 
@@ -85,12 +92,14 @@ export class ListaJuegosGuardadosComponent {
         );
     }
 
-  /// Carga Juegos muestra la carga inicial del JSON, pero al toque carga los datos de la API. Apenas tengamos lo de plataformas, estaria bueno que solo muestre la plataforma que el usuario tiene el juego.
   cargaJuegos(): void {
+    this.mostrandoWishlist = false;
     this.cargando = true;
     this.errorMessage = '';
+    this.games = [];
     const currentUser = this.authService.getCurrentUser();
     const userId = currentUser?.id;
+
     const start = (this.paginaActual - 1) * this.juegosPorPagina;
 
     if (!userId) {
@@ -119,7 +128,58 @@ export class ListaJuegosGuardadosComponent {
             }
           );
       }
-  
+
+  cargaWishlist(): void {
+    this.mostrandoWishlist = true;
+    this.cargando = true;
+    this.games = [];
+    this.errorMessage = '';
+    this.paginaActual = 1;
+    const currentUser = this.authService.getCurrentUser();
+    const userId = currentUser?.id;
+
+    if (!userId) {
+      this.cargando = false;
+      this.errorMessage = 'No se ha encontrado el ID de usuario. Por favor, inicie sesión nuevamente.';
+      return;
+    }
+
+
+    const start = (this.paginaActual - 1) * this.juegosPorPagina;
+
+
+    this.guardaJuegos.getWishlist(userId, start, this.juegosPorPagina + 1).subscribe(
+      (response: any[]) => {    
+        this.cargando = false;   
+        if (response.length > 0)
+        {    
+          this.games = response.slice(0, this.juegosPorPagina).sort((a, b) => a.created_at - b.created_at);
+          this.continua = response.length > this.juegosPorPagina;
+          console.log('Juegos en esta página:', this.games);
+        }
+        else{
+          this.cargando = false;
+          this.errorMessage = 'No tienes juegos guardados en tu lista de deseados.';
+        } 
+       },
+          (error) => {
+            this.cargando = false;
+            console.error('Error al cargar los juegos desde el JSON Server.', error);
+            }
+          );
+      }
+      addFromWishlist(gameId: number){
+
+        if(this.gameDetails)
+        {
+          this.juegosService.setGameDetailsExportado(this.gameDetails);
+          this.router.navigate(['/games', gameId]);
+        }
+        else
+        {
+          console.error("Llegué a un error y no se como llegaste acá, deberia ser imposible");
+       }
+      } 
 
 buscarJuegosColeccionEnApi(id: number): void{
 
@@ -209,6 +269,29 @@ volverALaLista() {
         this.isMenuOpen = false;
         // Actualiza la lista de juegos después de la eliminación si es necesario
         this.cargaJuegos();
+      },
+      error => console.error('Error al eliminar el juego:', error)
+    );
+  }
+
+  removeFromWishlist(event: MouseEvent, id: string) {
+    this.cargando = true;
+    event.stopPropagation();
+    this.mostrandoWishlist = true;
+    const currentUser = this.authService.getCurrentUser();
+    const userId = currentUser?.id;
+    if (!userId) {
+      this.cargando = false;
+      this.errorMessage = 'No se ha encontrado el ID de usuario. Por favor, inicie sesión nuevamente.';
+      return;
+    }
+    this.guardaJuegos.deleteGameFromWishlist(userId, id).subscribe(
+      () => {
+        console.log(`Juego con ID ${id} eliminado de la colección`);
+        this.cargando = false;
+        this.isMenuOpen = false;
+        // Actualiza la lista de juegos después de la eliminación si es necesario
+        this.cargaWishlist();
       },
       error => console.error('Error al eliminar el juego:', error)
     );

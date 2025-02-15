@@ -465,6 +465,63 @@ button {
   margin-top: 10px;
 }
 
+.wishlist-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.wishlist-button {
+  display: block;
+  background-color: #ffcc00; /* Amarillo */
+  color: #333;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.wishlist-button:hover {
+  background-color: #e6b800;
+}
+
+.botonesFin {
+  display: flex;
+  justify-content: center;
+  gap: 15px; 
+  margin-top: 15px;
+}
+
+.volver, .wishlist {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.volver {
+  background-color: #f1863f; 
+  color: white;
+}
+
+.wishlist {
+  background-color: #eb60b1;
+  color: white;
+}
+
+.volver:hover {
+  background-color: #f57824;
+}
+
+.wishlist:hover {
+  background-color: #e93ca1;
+}
+
 
 
 
@@ -473,7 +530,8 @@ button {
 
 <div class="background-container">
 
-  <h1 class="search-title">Mi Colección de Juegos</h1>
+  <h1 *ngIf="!mostrandoWishlist" class="search-title">Mi Colección de Juegos</h1>
+  <h1 *ngIf="mostrandoWishlist" class="search-title">Mi Lista de Deseados</h1>
 
 <div *ngIf="cargando" class="overlay">
   <div *ngIf="cargando" class="icono-carga" [ngClass]="{'fade-in': cargando, 'fade-out': !cargando}">
@@ -483,10 +541,16 @@ button {
 
 <div *ngIf="games[0] != null; else sinJuegos">
 
-  <div class="search-container" [ngClass]="{'fade-in': !cargando}" *ngIf="!mostrarDetalles">
+
+  <div class="search-container" [ngClass]="{'fade-in': !cargando}" *ngIf="!mostrarDetalles && !mostrandoWishlist">
     <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar juegos por nombre" (keyup.enter)="searchGamesbyName()"/>
     <button (click)="searchGamesbyName()">Buscar</button>
     <button (click)="resetSearch()">Reiniciar</button>
+  </div>
+
+  <div *ngIf="!mostrarDetalles" class="wishlist-container">
+    <button *ngIf="!mostrandoWishlist" class="wishlist-button" (click)="cargaWishlist()">💜 Ver lista de deseados 💜</button>
+    <button *ngIf="mostrandoWishlist" class="wishlist-button" (click)="cargaJuegos()">💾 Ver mi colección 💾</button>
   </div>
 
 <div *ngIf="!mostrarDetalles" class="games-container" >
@@ -496,23 +560,26 @@ button {
             ⋮
           </div>
           <div class="dropdown-menu" *ngIf="menuAbiertoId === game.id">
-            <button (click)="removeFromCollection($event, game.id)">Quitar de tu colección</button>
+            <button *ngIf="!mostrandoWishlist" (click)="removeFromCollection($event, game.id)">Quitar de tu colección</button>
+            <button *ngIf="mostrandoWishlist" (click)="removeFromWishlist($event, game.id)">Quitar de Lista de Deseados</button>
           </div>
 
           
           <img *ngIf="game.image_id" [src]="'//images.igdb.com/igdb/image/upload/t_cover_med/' + game.image_id + '.jpg'" alt="{{ game.name }}" />
           <h5>{{ game.name }}</h5>
+        <div *ngIf="!mostrandoWishlist">
           <span *ngIf="game.plataforma" class="consola">
             {{ game.plataforma }}
           </span>
           <hr>
-          <span *ngIf="game.precio" class="consola">
+          <span *ngIf="game.precio; else sinPrecio"  class="consola">
             Costo: ${{ game.precio }} USD
           </span>
           |
           <span *ngIf="game.estado" class="consola">
             Estado: <strong>{{ game.estado }}</strong>
           </span>
+        </div>
           </div>
         </div>
         <ng-template #noRating>
@@ -588,8 +655,9 @@ button {
         <button class="botonesNextBack" (click)="siguienteImagen(gameDetails.screenshots)">➡️</button>
       </div>
       <hr class="division">
-      <div>
-        <button (click)="volverALaLista()">Volver a la lista</button>
+      <div class="botonesFin">
+        <button class="volver" (click)="volverALaLista()">Volver a tu colección 🤗</button>
+        <button class="wishlist" *ngIf="mostrandoWishlist" (click)="addFromWishlist(gameDetails.id)">Agregar a tu colección 💾</button>
       </div>
       <div class="bottom-spacer"></div>
       
@@ -608,6 +676,25 @@ button {
 
   <ng-template #sinJuegos>
     <div class="sinJuegos" *ngIf="!cargando">
-    <h2 class="search-title">No tenés juegos en tu colección. ¡Empezá a cargarlos!</h2>
+      <div class="search-title">
+        <p>
+          <span *ngIf="mostrandoWishlist">No hay juegos en tu lista de deseados.</span><br>
+          <span *ngIf="!mostrandoWishlist">No tenés juegos en tu colección. ¡Empezá a cargarlos! 🤗</span>
+        </p>
+        <p *ngIf="mostrandoWishlist">¿Ya tenés todo lo que querés? 😝</p>
+      </div>
+      
+      <div class="wishlist-container" style="clear:both">
+      <button class="wishlist-button" *ngIf="mostrandoWishlist" (click)="cargaJuegos()">💾 Volver a la colección 💾</button>
+      <button class="wishlist-button" *ngIf="!mostrandoWishlist" (click)="rutaABuscarJuegos()">¡A buscar!</button>
+      <button class="wishlist-button" *ngIf="!mostrandoWishlist" (click)="cargaWishlist()">💜 Ver lista de deseados 💜</button>
     </div>
+    </div>
+  </ng-template>
+
+  <ng-template #sinPrecio>
+    <span class="consola">
+      Costo: Regalo 
+    </span>
+
   </ng-template>

@@ -193,9 +193,46 @@ button {
   flex-shrink: 0; /* Evita que el espaciador cambie de tamaño */
 }
 
+.botonesFin {
+  display: flex;
+  justify-content: center;
+  gap: 15px; 
+  margin-top: 15px;
+}
+
+.save-button, .wishlist-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.save-button {
+  background-color: #4CAF50; 
+  color: white;
+}
+
+.wishlist-button {
+  background-color: #f39c12;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #45a049;
+}
+
+.wishlist-button:hover {
+  background-color: #e67e22;
+}
+
 
 
 </style>
+
+
+
 <div class="background-container" [ngStyle]="{ 'background-image': 'url(//images.igdb.com/igdb/image/upload/t_screenshot_big/' + gameDetails.screenshots[0].image_id + '.jpg)' }">
 </div>
 <div class="top-spacer"></div>
@@ -203,6 +240,7 @@ button {
   <div class="cover-container">
     <img class="coverimagen" *ngIf="gameDetails.cover" [src]="'//images.igdb.com/igdb/image/upload/t_cover_big/' + gameDetails.cover.image_id + '.jpg'" alt="{{ gameDetails.name }}" />
   </div>
+
 
     <div class="content-container">
       <h1>{{ gameDetails.name }}</h1>
@@ -280,7 +318,10 @@ button {
       </select>
       <br>
     </div>
-        <button (click)="saveGame()">Guardar juego</button>        
+    <div class="botonesFin">
+        <button class="save-button" (click)="saveGame()">Guardar juego 💾</button>     
+        <button class="wishlist-button" (click)="wishlistGame()">Agregar a Lista de Deseados 💜</button>    
+    </div>   
     </div>
     <div class="bottom-spacer"></div>
     

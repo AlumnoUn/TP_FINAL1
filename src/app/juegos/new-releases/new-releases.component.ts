@@ -36,7 +36,7 @@ export class NewReleasesComponent {
 
     const headers = new HttpHeaders({
       'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-      'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
+      'Authorization': 'Bearer hrvutqz8l738o23z17fjm64mf3ecvb',
       "Accept": "application/json"
       });
 

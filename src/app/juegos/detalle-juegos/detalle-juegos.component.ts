@@ -19,9 +19,8 @@ import { AuthService } from '../../auth/service/auth.service';
 export class DetalleJuegosComponent implements OnInit {
 
   gameDetails: any;
-
   gameId!: number;
-
+  cargando: boolean = false;
   platformDetails: any;
   platforms: any [] = [];
   private gamesApi = '/api/games';
@@ -48,13 +47,22 @@ export class DetalleJuegosComponent implements OnInit {
 
   ngOnInit(): void {
     this.indiceImagenActual = 0;
+    
   ///Uso params para poder ir a la route especifica del game/id que necesite
     this.route.params.subscribe(params => {
     this.gameId = +params['id'];
+    
     this.gameDetails = this.juegoService.getGameByIdSearch(this.gameId);    
+    console.log(this.gameDetails);
+    if(!this.gameDetails)
+    {
+      this.gameDetails = this.juegoService.getGameDetailsExportado();
+    }
+    console.log(this.gameDetails);
     this.usuarioLoggeado();
     });
   }
+
 
   setGameDetails(gameId: number){
     this.gameDetails = this.juegoService.getGameByIdSearch(this.gameId); 
@@ -98,6 +106,30 @@ export class DetalleJuegosComponent implements OnInit {
       }
     );
   }
+
+  wishlistGame():void {
+    const currentUser = this.authService.getCurrentUser();
+
+    const wishlisted = {
+      juegoId: this.gameDetails.id,
+      name: this.gameDetails.name,
+      userId: currentUser?.id,
+      image_id: this.gameDetails.cover.image_id,
+      rating: this.gameDetails.rating,
+
+    }
+    this.jsonService.saveToWishlist(wishlisted).subscribe((response) => {
+      window.alert('¡Agregado a lista de deseados!');
+      console.log('¡Agregado a lista de deseados!', response);
+      this.router.navigate(['/buscarJuegos']);
+    },
+      (error) => {
+        console.error('No se pudo agregar a la lista de deseados', error);
+        window.alert('Error al agregar a la lista de deseados.');
+      }
+    );
+  }
+
   colorRating(rating: number): string {
     if (rating >= 90) {
       return 'rating-max';

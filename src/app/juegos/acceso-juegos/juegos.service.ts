@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { DetalleJuegosComponent } from "../detalle-juegos/detalle-juegos.component";
 
@@ -14,6 +14,18 @@ constructor(private http: HttpClient) {}
 private gamesApi = '/api/games';
 private games: any[] = [];
 private gameDetails: any[] = [];
+private gameDetailsExportado = new BehaviorSubject<any>(null);
+gameDetails$ = this.gameDetailsExportado.asObservable();
+
+setGameDetailsExportado(game: any)
+{
+    this.gameDetailsExportado.next(game);
+}
+
+getGameDetailsExportado() {
+    return this.gameDetailsExportado.value;
+}
+
 
 
 
@@ -21,7 +33,7 @@ private gameDetails: any[] = [];
 
     const headers = new HttpHeaders({
         'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-        'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
+        'Authorization': 'Bearer hrvutqz8l738o23z17fjm64mf3ecvb',
         "Accept": "application/json"
         });
 
@@ -47,7 +59,7 @@ private gameDetails: any[] = [];
     buscarJuegoEnJson(id: number): Observable<any>{
         const headers = new HttpHeaders({
             'Client-ID': 'z95q736cetyb3km0f13zyxu2ll7yfi',
-            'Authorization': 'Bearer deujpqb5iviotuqkhkki47n4bae7x2',
+            'Authorization': 'Bearer hrvutqz8l738o23z17fjm64mf3ecvb',
             "Accept": "application/json"
             });
         
@@ -78,6 +90,7 @@ setGames(games:any[]){
 getGameByIdSearch(id: number){
     return this.games.find(game=>game.id === id);
     }
+
  
 
 }
