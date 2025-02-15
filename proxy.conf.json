@@ -5,10 +5,6 @@
       "changeOrigin": true,
       "pathRewrite": {
         "^/api": ""
-      },
-      "headers": {
-        "Client-ID": "z95q736cetyb3km0f13zyxu2ll7yfi",
-        "Authorization": "Bearer deujpqb5iviotuqkhkki47n4bae7x2"
       }
-    }
   }
+}
