@@ -10,11 +10,16 @@ import { map, Observable } from 'rxjs';
 export class GuardaJuegosService {
 
   private urlJson = 'http://localhost:3000/games';
+  private urlWishlist = 'http://localhost:3000/wishlist';
 
   constructor(private http: HttpClient) {}
 
   saveGame(game: any): Observable<any> {
     return this.http.post(this.urlJson, game);
+  }
+
+  saveToWishlist(game: any): Observable<any>  {
+    return this.http.post(this.urlWishlist,game);
   }
 
   getGames(userId: string, page: number, limit: number): Observable<any>{
@@ -24,6 +29,15 @@ export class GuardaJuegosService {
     .set('_limit', limit.toString())
     ;
     return this.http.get<any>(this.urlJson, {params});
+  }
+
+  getWishlist(userId: string, page: number, limit: number): Observable<any>{
+    let params = new HttpParams()
+    .set('userId', userId)
+    .set('_start', page.toString())
+    .set('_limit', limit.toString())
+    ;
+    return this.http.get<any>(this.urlWishlist, {params});
   }
 
   getGamesBySearch(userId: string, searchterm: string): Observable<any> {
@@ -46,14 +60,13 @@ export class GuardaJuegosService {
     return this.http.delete<any>(`${this.urlJson}/${id}`, { params });
   }
 
-
-
-  /*
-  Cosas a agregar:
-  -Quitar juego de coleccion
--New releases??
--wishlist
--User experience/feedback
-*/
+  deleteGameFromWishlist(userId: string, id:string): Observable<any> {
+    console.log('Eliminando juego con ID:', id);
+    const params = new HttpParams()
+    .set('userId', userId)
+    .set('id', id);
+  
+    return this.http.delete<any>(`${this.urlWishlist}/${id}`, { params });
+  }
 
 }
